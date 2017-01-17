@@ -1,0 +1,6 @@
+.mvn/
+gradle/
+classes/
+target/
+bin/
+transaction-logs/
