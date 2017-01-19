@@ -1,0 +1,7 @@
+#registration, #login{
+	width: 400px;
+}
+
+button.btn-primary.btn{
+	margin-left: 10px !important;
+}
