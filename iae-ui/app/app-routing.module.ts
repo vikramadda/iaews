@@ -1,12 +1,13 @@
 import { NgModule }              from '@angular/core';
 import { RouterModule, Routes }  from '@angular/router';
-import { RegistrationComponent }   from './login/registration.component';
-import { LoginComponent }   from './login/login.component';
+import { SignupComponent }   from './login/signup.component';
+import { SigninComponent }   from './login/signin.component';
 
 const appRoutes: Routes = [
-  { path: 'registration',        component: RegistrationComponent },
-  { path: 'login',        component: LoginComponent }
+  { path: 'signup',        component: SignupComponent },
+  { path: 'signin',        component: SigninComponent }
 ];
+
 @NgModule({
   imports: [
     RouterModule.forRoot(appRoutes)
@@ -15,4 +16,5 @@ const appRoutes: Routes = [
     RouterModule
   ]
 })
+
 export class AppRoutingModule {}
