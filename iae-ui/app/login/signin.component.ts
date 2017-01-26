@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { FormGroup, FormBuilder, Validators, AbstractControl, ValidatorFn, FormArray } from '@angular/forms';
 import { LoginService } from './login.service';
 import { User } from './login.model';
 import { Location }               from '@angular/common';
@@ -12,15 +13,28 @@ import { Location }               from '@angular/common';
   providers:[LoginService]
 })
 
-export class SigninComponent  {
-
+export class SigninComponent implements OnInit {
 	constructor(
 		private router:Router,
+		private fb: FormBuilder,
 		private loginservie: LoginService, 
 		private location: Location
 		){}
 	
-	signinUser : User = new User();
+	signinForm:FormGroup;
+
+	ngOnInit() : void {
+		this.signinForm=this.fb.group({
+			userName: ['', [Validators.required]],
+			password: ['', [Validators.required]]
+		});
+	}
+
+	signin(): void {
+		console.log('signup data'+JSON.stringify(this.signinForm.value));
+	}
+
+	/*signinUser : User = new User();
 	
 	validateSignin() :void {
 		this.loginservie.verifyUser(this.signinUser)
@@ -28,5 +42,5 @@ export class SigninComponent  {
 					console.log("user valid",validUser);
 			      		this.location.back();
 		    		});
-	}
+	}*/
 }

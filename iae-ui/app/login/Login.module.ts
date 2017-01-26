@@ -5,9 +5,10 @@ import { HttpModule }    from '@angular/http';
 import { SigninComponent } from './signin.component';
 import { SignupComponent} from './signup.component';
 import  { AppRoutingModule } from "../app-routing.module";
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  imports:      [ CommonModule, FormsModule, HttpModule, AppRoutingModule ],
+  imports:      [ CommonModule, FormsModule, HttpModule,ReactiveFormsModule, AppRoutingModule ],
   declarations: [ SigninComponent, SignupComponent ],
   exports : [ SigninComponent, SignupComponent ]
 })
