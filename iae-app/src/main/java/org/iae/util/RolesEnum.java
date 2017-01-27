@@ -54,6 +54,23 @@ public class RolesEnum {
 			return role;
 		}
 
+		public static Role getById(Long id) {
+
+			Role role = null;
+
+			for(ENUMS e : values()) {
+				if(e.id.equals(id)) {
+					role = new Role();
+					role.setId(Long.valueOf(e.id));
+					role.setName(e.name);
+					role.setDescription(e.description);
+					break;
+				}
+			}
+			
+			return role;
+		}
+
 		public static List<Role> getAll() {
 
 			List<Role> roleList = new ArrayList<>();

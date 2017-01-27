@@ -11,18 +11,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/role")
+//@RequestMapping("/role")
 public class RoleController {
 
 	@Autowired
 	private RoleService roleService;
 	
-    @RequestMapping(path="/getAll", method=RequestMethod.GET)
+    @RequestMapping(path="/roles", method=RequestMethod.GET)
     public List<Role> getAllRoles() {
     	return roleService.getAllRoles();
     }
 
-    @RequestMapping(path="/{roleName}", method=RequestMethod.GET)
+    @RequestMapping(path="role/{roleName}", method=RequestMethod.GET)
     public Role getByName(@PathVariable String roleName) {
     	return roleService.getByName(roleName);
     }

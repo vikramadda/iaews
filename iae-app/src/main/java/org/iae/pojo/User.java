@@ -1,10 +1,20 @@
 package org.iae.pojo;
 
+import java.io.IOException;
+import java.util.List;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.iae.util.JsonUtil;
+
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Entity
 @Table(name="users")
@@ -19,6 +29,18 @@ public class User {
 	private String mobile;
 	private String email;
 	private Long role;
+
+	@Column(name="securityquestions")
+	private String securityQuestions;
+	
+	@Transient
+	private String confirmPassword;
+
+	@Transient
+	private List<SecurityQuestion> securityQuestionList;
+
+	@Transient
+	ObjectMapper om = new ObjectMapper();
 	
 	public Long getId() {
 		return id;
@@ -55,5 +77,25 @@ public class User {
 	}
 	public void setRole(Long role) {
 		this.role = role;
+	}
+	public String getConfirmPassword() {
+		return confirmPassword;
+	}
+	public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
+	}
+	
+	public List<SecurityQuestion> getSecurityQuestionList() {
+		
+		try {
+			securityQuestionList = om.readValue(securityQuestions, new TypeReference<List<SecurityQuestion>>(){});
+		} catch (IOException e) {}
+		
+		return securityQuestionList;
+	}
+	
+	public void setSecurityQuestionList(List<SecurityQuestion> securityQuestionList) {
+		this.securityQuestionList = securityQuestionList;
+		securityQuestions = JsonUtil.getJson(securityQuestionList);
 	}
 }
