@@ -1,0 +1,63 @@
+<div class="panel panel-primary" style="margin-left:30%;width:500px;">
+    <div class="panel-heading">
+        <span>Sign In!</span><span style="float:right"> Don't have an account ? <a style="color: white;text-decoration: underline;cursor: pointer;" routerLink="/signup">Create account</a></span>
+    </div>
+
+    <div class="panel-body">
+        <form class="form-horizontal"
+              novalidate
+              (ngSubmit)="signin()"
+              [formGroup]="signinForm">
+            <fieldset>
+            	<div class="form-group"
+                    [ngClass]="{'has-error': firstNameMessage }">
+                    <label class="col-md-3 control-label" 
+                           for="userNameId">User Name</label>
+                    <div class="col-md-6">
+                        <input class="form-control" 
+                               id="userNameId"
+                               type="text" 
+                               class="col-md-12" 
+                               formControlName="userName"
+                               placeholder="Email or Phone Number"/>
+                    </div>
+                </div>
+                <div class="form-group"
+                    [ngClass]="{'has-error': firstNameMessage }">
+                    <label class="col-md-3 control-label" 
+                           for="passwordId">Password</label>
+                    <div class="col-md-6">
+                        <input class="form-control" 
+                               id="passwordId"
+                               type="text" 
+                               class="col-md-12" 
+                               formControlName="password"
+                               placeholder="Password"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-4 col-md-offset-6">
+                        <span>
+                            <button class="btn btn-primary col-md-8"
+                                    type="submit"
+                                    [disabled]="!signinForm.valid">
+                                Login
+                            </button>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-12 col-md-offset-2">
+                        <span>
+                            	<div>Forgot password ? 
+	                            	<a style="cursor:pointer;">
+	                            	   Click here
+	                            	</a>
+					</div>
+                        </span>
+                    </div>
+                </div>
+            </fieldset>
+         </form>
+    </div>
+</div>
