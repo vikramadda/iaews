@@ -41,7 +41,7 @@ export class SignupComponent implements OnInit {
 	confirmPasswordMessage: string;
 
 	private validationMessages = {
-	      required	: 	'Please enter value.',
+	      required	: 	'You can\'t leave this empty.',
         	pattern	: 	'Please enter a valid value.',
         	match		:	'Confirmation value not matched.',
         	minlength	:	'value is too short in length.',

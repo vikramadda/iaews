@@ -7,8 +7,10 @@ import { FooterComponent } from './footer.component';
 import { LoginModule } from '../login/login.module';
 import  { AppRoutingModule } from "../app-routing.module";
 
+import { UtilsModule } from '../utils/utils.module';
+
 @NgModule({
-  imports:      [ CommonModule , LoginModule, AppRoutingModule],
+  imports:      [ CommonModule , LoginModule, AppRoutingModule, UtilsModule],
   declarations: [ HeaderComponent, MainContainerComponent, FooterComponent ],
   exports :[ HeaderComponent, MainContainerComponent, FooterComponent ]
 })
