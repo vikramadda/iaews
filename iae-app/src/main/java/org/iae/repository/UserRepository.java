@@ -13,4 +13,5 @@ public interface UserRepository extends CrudRepository<User, Long> {
 
     User findByNameAllIgnoringCase(String name);
 
+    Page<User> findByRole(Long role);
 }

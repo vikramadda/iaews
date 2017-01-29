@@ -4,8 +4,8 @@ import org.iae.exception.AuthenticationException;
 import org.iae.exception.ObjectNotFoundException;
 import org.iae.exception.OperationFailedException;
 import org.iae.pojo.User;
-import org.iae.repository.UserRepository;
 import org.iae.service.LoginService;
+import org.iae.service.UserService;
 import org.iae.util.SecurityUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,7 +18,7 @@ public class LoginServiceImpl implements LoginService {
 	private static final Logger logger = LoggerFactory.getLogger(LoginService.class);
 	
 	@Autowired
-	private UserRepository userRepository;
+	private UserService userService;
 	
 	@Override
 	public User authenticate(String userName, String password) throws ObjectNotFoundException, AuthenticationException {
@@ -27,7 +27,7 @@ public class LoginServiceImpl implements LoginService {
 		
 		boolean isAuthenticated = false;
 		
-		User user = userRepository.findByNameAllIgnoringCase(userName);
+		User user = userService.getUser(userName);
 		
 		if(user != null) {
 			String hashedPassword = SecurityUtil.generateHash(password); 
@@ -56,13 +56,13 @@ public class LoginServiceImpl implements LoginService {
 
 		boolean isResetted = false;
 
-		User user = userRepository.findByNameAllIgnoringCase(userName);
+		User user = userService.getUser(userName);
 
 		try {
 			if(user != null) {
 				if(user.getPassword().equals(SecurityUtil.generateHash(oldPassword))) {
 					user.setPassword(SecurityUtil.generateHash(newPassword));
-					userRepository.save(user);
+					userService.updateUser(user);
 					isResetted = true;
 				} else {
 					throw new OperationFailedException("Given password is not match : " + userName);
