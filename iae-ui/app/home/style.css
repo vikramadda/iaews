@@ -20,7 +20,7 @@
   float:right;
   margin-top:35px;
   max-width:665px;
-  margin-left: 40px;
+  margin-left: 35px;
   height:35px;
 }
     
@@ -37,6 +37,7 @@
 
 #main_menu ul li a {
   text-transform:uppercase;
+  font-weight: bold;
   padding:0 18px;
   font-size:14px;
   color:blue;
@@ -100,8 +101,6 @@
   margin:0 auto;
   clear:both;
   width:1000px;
-  /*background-color: #e0dbd4;*/
-  min-height: 500px;
 }
 #utility {
   float:right;
@@ -124,20 +123,37 @@
   background-position:-23px -24px;
 }
 
-
 #footer_container {
-  background-image: linear-gradient(#886666, #000000);
+  background-image: linear-gradient(#5b66f9, #05202d);
   color: #fff;
   font-weight: bold;
-  min-height: 50px;
+  min-height: 30px;
   text-align: center;
-  margin-top: 10px;
-  margin-bottom: auto;
+  margin-top: 5px;
+  margin-bottom: 2px;
   margin-left: auto;
   margin-right: auto;
+  bottom: 0;
+  clear: both;
 }
 
 #imageslider_container{
-      width: 60%;
+      width: 30%;
       margin: auto;
+}
+
+.jumbotron{
+  background-color: inherit;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.jumbotron .panel{
+  padding:5px 10px;  
+  border:1px solid #ccc;
+  border-radius:8px;
+  box-shadow:1px 1px 3px 1px #CCC;
+  height: 350px;
+  text-align:justify;
+  background-color: #eee;
 }
