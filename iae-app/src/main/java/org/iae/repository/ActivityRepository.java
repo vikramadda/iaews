@@ -1,5 +1,7 @@
 package org.iae.repository;
 
+import java.util.List;
+
 import org.iae.pojo.Activity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.repository.CrudRepository;
@@ -12,9 +14,9 @@ public interface ActivityRepository extends CrudRepository<Activity, Long> {
 	
 	Activity findByName(String name);
 	
-	Page<Activity> findAllByStatus(String status);
+	List<Activity> findAllByStatus(String status);
 	
-	Page<Activity> findAllByProjectId(Long project);
+	List<Activity> findAllByProjectId(Long project);
 	
-	Page<Activity> findAllByProject(String projectName);
+	List<Activity> findAllByProject(String projectName);
 }

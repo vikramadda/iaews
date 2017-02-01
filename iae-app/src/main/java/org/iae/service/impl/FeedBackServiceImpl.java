@@ -10,7 +10,9 @@ import org.iae.service.FeedBackService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class FeedBackServiceImpl implements FeedBackService {
 
 	private static final Logger logger = LoggerFactory.getLogger(FeedBackService.class);
@@ -58,10 +60,9 @@ public class FeedBackServiceImpl implements FeedBackService {
 		return (List<Feedback>) feedBackRepository.findAll();
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<Feedback> getAllByActivity(String activityName) {
 		logger.debug("Entered into getAllByActivity()");
-		return (List<Feedback>) feedBackRepository.findAllByActivity(activityName);
+		return feedBackRepository.findAllByActivity(activityName);
 	}
 }

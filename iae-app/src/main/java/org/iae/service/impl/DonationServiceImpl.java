@@ -10,7 +10,9 @@ import org.iae.service.DonationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class DonationServiceImpl implements DonationService {
 
 	private static final Logger logger = LoggerFactory.getLogger(DonationService.class);
@@ -56,7 +58,6 @@ public class DonationServiceImpl implements DonationService {
 		return donationList;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<Donation> getDonationsByDate(Date date) {
 	
@@ -64,7 +65,7 @@ public class DonationServiceImpl implements DonationService {
 		
 		logger.debug("Entered into getDonationsByDate() method");
 		
-		donationList = (List<Donation>) donationRepository.findByDonationDate(date);
+		donationList = donationRepository.findByDonationDate(date);
 		
 		logger.debug("Entered into getDonationsByDate() method");
 		

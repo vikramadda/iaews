@@ -1,6 +1,7 @@
 package org.iae.repository;
 
 import java.util.Date;
+import java.util.List;
 
 import org.iae.pojo.Donation;
 import org.springframework.data.domain.Page;
@@ -12,5 +13,5 @@ public interface DonationRepository extends CrudRepository<Donation, Long> {
 
 	Page<Donation> findAll();
 
-	Page<Donation> findByDonationDate(Date date);
+	List<Donation> findByDonationDate(Date date);
 }

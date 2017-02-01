@@ -16,9 +16,8 @@ public class Feedback {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
-	@Column(name="activityid")
 	@OneToOne
-	@JoinColumn(name="id")
+	@JoinColumn(name="activityid")
 	private Activity activity;
 	@Column(name="feedbacktype")
 	private String feedBackType;

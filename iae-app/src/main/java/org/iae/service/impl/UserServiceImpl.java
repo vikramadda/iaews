@@ -14,7 +14,9 @@ import org.iae.util.SecurityUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class UserServiceImpl implements UserService {
 
 	private static final Logger logger = LoggerFactory.getLogger(UserService.class);
@@ -25,7 +27,6 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserRepository userRepository;
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<User> getUsersByRole(String roleName) throws ObjectNotFoundException {
 
@@ -36,7 +37,7 @@ public class UserServiceImpl implements UserService {
 		Role role = roleService.getByName(roleName);
 		
 		if(role != null) {
-			userList = (List<User>) userRepository.findByRole(role.getId());
+			userList = userRepository.findByRole(role.getId());
 		} else {
 			throw new ObjectNotFoundException("No Role found with rolename : "+ roleName);
 		}

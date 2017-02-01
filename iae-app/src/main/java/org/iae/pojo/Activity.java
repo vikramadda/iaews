@@ -45,9 +45,11 @@ public class Activity {
 	private String imagesLoc;
 	
 	@OneToOne
-	@JoinColumn(name="id")
+	@JoinColumn(name="projectid")
 	private Project project;
 
+	
+	
 	@Transient
 	private List<String> imagesURL;
 	

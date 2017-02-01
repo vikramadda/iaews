@@ -1,5 +1,7 @@
 package org.iae.repository;
 
+import java.util.List;
+
 import org.iae.pojo.Feedback;
 import org.springframework.data.domain.Page;
 import org.springframework.data.repository.CrudRepository;
@@ -10,5 +12,5 @@ public interface FeedBackRepository extends CrudRepository<Feedback, Long> {
 
 	Page<Feedback> findAll();
 
-	Page<Feedback> findAllByActivity(String activityName);
+	List<Feedback> findAllByActivity(String activityName);
 }
