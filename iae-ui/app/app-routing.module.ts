@@ -3,7 +3,7 @@ import { RouterModule, Routes }  from '@angular/router';
 import { SignupComponent }   from './login/signup.component';
 import { SigninComponent }   from './login/signin.component';
 import { MainContainerComponent } from './home/maincontainer.component';
-import { AddActivitiesComponent } from './misc/addactivites.component';
+import { AddActivityComponent } from './misc/addactivity.component';
 import { ViewActivitiesComponent } from './misc/viewactivities.component';
 import { HeaderComponent } from './home/header.component';
 import { AppComponent} from './app.component';
@@ -13,7 +13,7 @@ const appRoutes: Routes = [
   { path: 'signup',        component: SignupComponent },
   { path: 'signin',        component: SigninComponent },
   { path: 'home',          component: MainContainerComponent },
-  { path: 'addactivities',          component: AddActivitiesComponent },
+  { path: 'addactivity',          component: AddActivityComponent },
   { path: 'viewactivities',         component: ViewActivitiesComponent },
 
 

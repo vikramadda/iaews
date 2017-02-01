@@ -1,13 +1,14 @@
 import { NgModule }      from '@angular/core';
 import {CommonModule} from "@angular/common";
+import { ReactiveFormsModule } from '@angular/forms';
 
 import  { AppRoutingModule } from "../app-routing.module";
-import { AddActivitiesComponent } from './addactivites.component';
+import { AddActivityComponent } from './addactivity.component';
 import { ViewActivitiesComponent } from './viewactivities.component';
 
 @NgModule({
-  imports:      [ CommonModule ],
-  declarations: [ AddActivitiesComponent, ViewActivitiesComponent],
-  exports : [ AddActivitiesComponent, ViewActivitiesComponent ]
+  imports:      [ CommonModule, ReactiveFormsModule ],
+  declarations: [ AddActivityComponent, ViewActivitiesComponent],
+  exports : [ AddActivityComponent, ViewActivitiesComponent ]
 })
 export class MiscModule { }
