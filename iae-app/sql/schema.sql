@@ -31,12 +31,13 @@ CREATE TABLE securityquestions (
 
 --Documents table
 CREATE TABLE docs (
-  id int(10) NOT NULL auto_increment,
-  name varchar(20) NOT NULL,
-  description varchar(80) default NULL,
-  path varchar(80) NOT NULL,
+  id INT(10) NOT NULL AUTO_INCREMENT,
+  NAME VARCHAR(20) NOT NULL,
+  description VARCHAR(80) DEFAULT NULL,
+  doctype VARCHAR(255) DEFAULT NULL,
+  location VARCHAR(128) NOT NULL,
   PRIMARY KEY  (id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
 --Donations table
 CREATE TABLE donations (
@@ -57,6 +58,7 @@ CREATE TABLE projects (
   description varchar(80) default NULL,
   creationdate datetime default NULL,
   enddate datetime default NULL,
+  status varchar(20) default NULL,
   logo varchar(80) default NULL,
   PRIMARY KEY  (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -66,9 +68,35 @@ CREATE TABLE activities (
   id int(20) NOT NULL auto_increment,
   name varchar(80) NOT NULL,
   description varchar(80) default NULL,
-  budget int(10) default NULL,
+  actbudget int(10) default NULL,
+  estbudget int(10) default NULL,
+  startdate datetime default NULL,
+  enddate datetime default NULL,
+  status varchar(20) default NULL,
   logo varchar(80) default NULL,
+  imagesloc varchar(80) default NULL,  
   projectid int(20) default NULL,
   PRIMARY KEY  (id),
   FOREIGN KEY (projectid) REFERENCES projects(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--Feedback table
+CREATE TABLE feedback (
+  id int(20) NOT NULL auto_increment,
+  activityid int(20) default NULL,
+  feedbacktype varchar(20) default NULL,
+  feedback varchar(1000) default NULL,
+  PRIMARY KEY  (id),
+  FOREIGN KEY (activityid) REFERENCES activities(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--Boardmembers table
+CREATE TABLE boardmembers (
+  id int(20) NOT NULL auto_increment,
+  name varchar(80) default NULL,
+  role varchar(20) default NULL,
+  roledesc varchar(80) default NULL,
+  phone varchar(15) default NULL,
+  address varchar(255) default NULL,
+  PRIMARY KEY  (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

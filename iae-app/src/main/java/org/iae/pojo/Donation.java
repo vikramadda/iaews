@@ -3,10 +3,16 @@ package org.iae.pojo;
 import java.util.Date;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
+@Entity
+@Table(name="donations")
 public class Donation {
 
     @Id
@@ -17,10 +23,14 @@ public class Donation {
 	@Column(name="panno")
 	private String panNo;
 	private Long amount;
+	
+	@Temporal(TemporalType.DATE)
 	@Column(name="donationdate")
 	private Date donationDate;
+	
 	private String currency;
 	private String address;
+
 	public Long getId() {
 		return id;
 	}

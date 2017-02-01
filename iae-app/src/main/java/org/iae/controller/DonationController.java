@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping(path="/donation")
 public class DonationController {
 
 	private static final Logger logger = LoggerFactory.getLogger(DonationController.class);
@@ -25,7 +26,7 @@ public class DonationController {
 	@Autowired
 	private DonationService donationService;
 	
-	@RequestMapping(path="donations/add", method=RequestMethod.POST)
+	@RequestMapping(path="/add", method=RequestMethod.POST)
 	public ResponseEntity<String> addDonation(@RequestBody Donation donation) {
 
 		logger.debug("Entered into addDonation()");
@@ -51,7 +52,7 @@ public class DonationController {
 	            .body("Donation added successfully");
 	}
 
-	@RequestMapping(path="donations/add", method=RequestMethod.POST)
+	@RequestMapping(path="/addAll", method=RequestMethod.POST)
 	public ResponseEntity<String> addDonations(List<Donation> donations) {
 
 		logger.debug("Entered into addDonations()");
@@ -77,7 +78,7 @@ public class DonationController {
 	            .body("Donation added successfully");
 	}
 	
-	@RequestMapping(path="donations", method=RequestMethod.GET)
+	@RequestMapping(path="/all", method=RequestMethod.GET)
 	public List<Donation> getAllDonations() {
 		
 		logger.debug("Entered into getAllDonations()");
@@ -85,7 +86,7 @@ public class DonationController {
 		return donationService.getAllDonations();
 	}
 	
-	@RequestMapping(path="donations/{date}", method=RequestMethod.GET)
+	@RequestMapping(path="/{date}", method=RequestMethod.GET)
 	public List<Donation> getDonationsByDate(@PathVariable Date date) {
 		
 		logger.debug("Entered into getDonationsByDate(), Date : {} ", date);
