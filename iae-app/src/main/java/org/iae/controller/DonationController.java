@@ -53,7 +53,7 @@ public class DonationController {
 	}
 
 	@RequestMapping(path="/addAll", method=RequestMethod.POST)
-	public ResponseEntity<String> addDonations(List<Donation> donations) {
+	public ResponseEntity<String> addDonations(@RequestBody List<Donation> donations) {
 
 		logger.debug("Entered into addDonations()");
 		

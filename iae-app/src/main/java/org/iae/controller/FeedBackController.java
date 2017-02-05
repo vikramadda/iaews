@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,7 +27,7 @@ public class FeedBackController {
 	private FeedBackService feedBackService;
 
     @RequestMapping(path="/add", method=RequestMethod.POST)
-	public ResponseEntity<Object> addFeedback(Feedback feedback) {
+	public ResponseEntity<Object> addFeedback(@RequestBody Feedback feedback) {
 		
 		logger.debug("Entered into addFeedback()");
 
@@ -54,7 +55,7 @@ public class FeedBackController {
 	}
 
     @RequestMapping(path="/update", method=RequestMethod.PUT)
-	public ResponseEntity<String> updateFeedback(Feedback feedback) {
+	public ResponseEntity<String> updateFeedback(@RequestBody Feedback feedback) {
 		
 		logger.debug("Entered into updateFeedback()");
 

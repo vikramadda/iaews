@@ -29,7 +29,9 @@ public class Project {
 	@Column(name="enddate")
 	private Date endDate;
 	private String status;
-	private String logo;
+	
+	@Column(name="logo")
+	private String logoLocWithName;
 
 	public Long getId() {
 		return id;
@@ -67,10 +69,10 @@ public class Project {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	public String getLogo() {
-		return logo;
+	public String getLogoLocWithName() {
+		return logoLocWithName;
 	}
-	public void setLogo(String logo) {
-		this.logo = logo;
+	public void setLogoLocWithName(String logo) {
+		this.logoLocWithName = logo;
 	}
 }
