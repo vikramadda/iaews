@@ -9,8 +9,7 @@
               (ngSubmit)="signin()"
               [formGroup]="signinForm">
             <fieldset>
-            	<div class="form-group"
-                    [ngClass]="{'has-error': firstNameMessage }">
+            	  <div class="form-group">
                     <label class="col-md-3 control-label" 
                            for="userNameId">User Name</label>
                     <div class="col-md-6">
@@ -21,8 +20,7 @@
                                placeholder="Email or Phone Number"/>
                     </div>
                 </div>
-                <div class="form-group"
-                    [ngClass]="{'has-error': firstNameMessage }">
+                <div class="form-group">
                     <label class="col-md-3 control-label" 
                            for="passwordId">Password</label>
                     <div class="col-md-6">

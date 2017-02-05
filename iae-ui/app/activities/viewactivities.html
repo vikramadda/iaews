@@ -1,0 +1,19 @@
+<div>
+<h1>{{pageTitle}}</h1>
+<table>
+	<tr>
+		<th>Activity ID</th>
+		<th>Activity name</th>
+		<th>Project</th>
+		<th>Activity Description</th>
+		<th>Activity Start Date</th>
+	</tr>
+	<tr *ngFor="let activity of activities">
+		<td>{{activity.activityName}}</td>
+		<td><a [routerLink]="['/activity',activity.activityName]">{{activity.activityName}}</a></td>
+		<td>{{activity.project}}</td>
+		<td>{{activity.description}}</td>
+		<td>{{activity.startDate}}</td>
+	</tr>
+</table>
+</div>
