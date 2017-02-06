@@ -71,7 +71,7 @@
                     </div>
                 </div>
             </fieldset>
-            {{addActivityForm.value|json}}
          </form>
+         <div class='has-error' *ngIf='errorMessage'><span class="help-block errorsblock">{{errorMessage}}</span></div>
     </div>
 </div>
