@@ -1,5 +1,7 @@
 package org.iae.repository;
 
+import java.util.List;
+
 import org.iae.pojo.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,4 +15,5 @@ public interface UserRepository extends CrudRepository<User, Long> {
 
     User findByNameAllIgnoringCase(String name);
 
+    List<User> findByRole(Long role);
 }
