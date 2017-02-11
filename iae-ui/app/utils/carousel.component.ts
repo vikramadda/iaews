@@ -1,5 +1,5 @@
 //Import Component form the angular core package
-import {Component} from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 //Importt the Image interface
 import {Image} from './image.model';
@@ -13,13 +13,12 @@ import {Image} from './image.model';
   template: `
  <div class="carousel">
 
-  <ul class="slides">
+  <ul class="slides" [ngStyle]="{'width': images.length*100+'%'}">
 
-    <li *ngFor="let image of images">
-      <h2>{{image.title}}</h2>
+    <li *ngFor="let image of images" [ngStyle]="{'width': 100/images.length+'%'}">
       <img src="{{image.url}}" alt="">
+      <h2>{{image.title}}</h2>
     </li>
-
    
   </ul>
 
@@ -34,28 +33,28 @@ import {Image} from './image.model';
 .slides{
     list-style:none;
     position:relative;
-    width:500%; /* Number of panes * 100% */
-    overflow:hidden; /* Clear floats */
-        /* Slide effect Animations*/
-    -moz-animation:carousel 30s infinite;
-    -webkit-animation:carousel 30s infinite;
-    animation:carousel 30s infinite;
+    overflow:hidden;
+    -moz-animation:carousel 10s infinite;
+    -webkit-animation:carousel 10s infinite;
+    animation:carousel 10s infinite;
+    padding-left:0px;
+    margin-left:15px;
 }
 .slides > li{
     position:relative;
     float:left;
-    width: 20%; /* 100 / number of panes */
 }
 .carousel img{
     display:block;
     width:100%;
     max-width:100%;
+    height:220px;
 }
 .carousel h2{
     margin-bottom: 0;
     font-size:1em;
-    padding:1.5em 0.5em 1.5em 0.5em;
-    position:absolute;
+    padding:0.5em 0.5em 0.5em 0.5em;
+    position:relative;
     right:0px;
     bottom:0px;
     left:0px;
@@ -68,20 +67,20 @@ import {Image} from './image.model';
 @keyframes carousel{
     0%    { left:-5%; }
     11%   { left:-5%; }
-    12.5% { left:-105%; }
-    23.5% { left:-105%; }
-    25%   { left:-205%; }
-    36%   { left:-205%; }
-    37.5% { left:-305%; }
-    48.5% { left:-305%; }
-    50%   { left:-405%; }
-    61%   { left:-405%; }
-    62.5% { left:-305%; }
-    73.5% { left:-305%; }
-    75%   { left:-205%; }
-    86%   { left:-205%; }
+    12.5% { left:-005%; }
+    23.5% { left:-005%; }
+    25%   { left:-005%; }
+    36%   { left:-105%; }
+    37.5% { left:-105%; }
+    48.5% { left:-105%; }
+    50%   { left:-105%; }
+    61%   { left:-205%; }
+    67.5% { left:-205%; }
+    73.5% { left:-205%; }
+    75%   { left:-105%; }
+    86%   { left:-105%; }
     87.5% { left:-105%; }
-    98.5% { left:-105%; }
+    98.5% { left:-005%; }
     100%  { left:-5%; }
 }
   `],
@@ -89,14 +88,5 @@ import {Image} from './image.model';
 //Carousel Component itself
 export class CSSCarouselComponent {
     //images data to be bound to the template
-	public images = IMAGES;
+    @Input() images:Image[];
 }
-
-//IMAGES array implementing Image interface
-var IMAGES: Image[] = [
-	{ "title": "We are covered", "url": "https://raw.githubusercontent.com/christiannwamba/angular2-carousel-component/master/images/covered.jpg" },
-	{ "title": "Generation Gap", "url": "https://raw.githubusercontent.com/christiannwamba/angular2-carousel-component/master/images/generation.jpg" },
-	{ "title": "Potter Me", "url": "https://raw.githubusercontent.com/christiannwamba/angular2-carousel-component/master/images/potter.jpg" },
-	{ "title": "Pre-School Kids", "url": "https://raw.githubusercontent.com/christiannwamba/angular2-carousel-component/master/images/preschool.jpg" },
-	{ "title": "Young Peter Cech", "url": "https://raw.githubusercontent.com/christiannwamba/angular2-carousel-component/master/images/soccer.jpg" }	
-];

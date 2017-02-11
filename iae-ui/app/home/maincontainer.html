@@ -1,24 +1,27 @@
 <div id="main_container">
-	<img src="https://raw.githubusercontent.com/christiannwamba/angular2-carousel-component/master/images/preschool.jpg" width="100%" height="350px">
+	<img src="app/images/home.jpg" width="100%" height="350px">
 	<div class="jumbotron">
-	    	<div class="col-md-4 panel panel-default introduction">
-			introduction
+	    	<div class="col-md-4 panel panel-default introduction" style="padding-left: 15px;padding-right: 25px;padding-top: 10px;">
+			<p class="textPanel">
+			 	My Foundation is a national level development organisation directly benefitting over 400,000 children and their families every year, through more than 200 live welfare projects on education, healthcare, livelihood and women empowerment, in over 950 remote villages and slums across 25 states of India.
+			 </p>
+			 <button class="readMore">Read More...</button>
 		</div>
 		<div class="col-md-4 panel panel-default events">
-			<h4>events and updates</h4>
-	    		<iae-imageslider></iae-imageslider>
+			<h5 class="panel-heading">EVENTS & UPDATES</h5>
+	    		<iae-imageslider [images]="imageList"></iae-imageslider>
 		</div>
 		<div class="col-md-4 panel panel-default achievements">
-			Achievements
+			<h5 class="panel-heading">UPCOMING EVENTS</h5>
 		</div>
 		<div class="col-md-4 panel panel-default">
-			introduction
+			<h5 class="panel-heading">ACHIEVEMENTS</h5>
 		</div>
 		<div class="col-md-4 panel panel-default">
-			events and updates
+			<h5 class="panel-heading">GALLERY</h5>
 		</div>
-		<div class="col-md-4 panel panel-default">
-			Achievements
+		<div class="col-md-4 panel panel-default lastpanel">
+			<h5 class="panel-heading">SUPPORTERS TALK</h5>
 		</div>
 	</div>
 </div>
