@@ -9,8 +9,8 @@
               (ngSubmit)="add()"
               [formGroup]="addActivityForm">
             <fieldset>
-            	<div class="form-group"
-                    [ngClass]="{'has-error': activityNameMessage }">
+            	  <div class="form-group"
+                    [ngClass]="{'has-error': displayMessage.activityName }">
                     <label class="col-md-3 control-label" 
                            for="activityNameId">Activity Name</label>
                     <div class="col-md-6">
@@ -19,38 +19,44 @@
                                class="form-control col-md-12" 
                                formControlName="activityName"
                                placeholder="Activity Name"/>
+                        <span class="col-md-8 help-block" *ngIf="displayMessage.activityName">
+                            {{ displayMessage.activityName }}
+                        </span>
                     </div>
                 </div>
                 <div class="form-group"
-                    [ngClass]="{'has-error': pojectMessage }">
+                    [ngClass]="{'has-error': displayMessage.project }">
                     <label class="col-md-3 control-label" 
                            for="projectId">Project</label>
                     <div class="col-md-6">
-
                       <select id="projectId" class="form-control col-md-12"  formControlName="project">
                           <option *ngFor="let item of projects" [value]="item">  
                           {{item}}
                           </option>
                       </select>
+                      <span class="col-md-8 help-block" *ngIf="displayMessage.project">
+                            {{ displayMessage.project }}
+                      </span>
                     </div>
                 </div>
                 <div class="form-group"
-                    [ngClass]="{'has-error': activityDescrMessage }">
+                    [ngClass]="{'has-error': displayMessage.description }">
                     <label class="col-md-3 control-label" 
-                           for="activityDescrId">Activity Description</label>
+                           for="descriptionId">Activity Description</label>
                     <div class="col-md-6">
-                        <input id="activityDescrId"
-                               type="textarea" 
+                        <textarea id="descriptionId"
                                class="form-control col-md-12" 
-                               formControlName="activityDescr"
-                               placeholder="Activity Description"/>
+                               formControlName="description"
+                               placeholder="Activity Description"></textarea>
+                        <span class="col-md-8 help-block" *ngIf="displayMessage.description">
+                            {{ displayMessage.description }}
+                        </span>
                     </div>
                 </div>
                <div class="form-group">
                     <div class="col-md-4 col-md-offset-4">
                         <span>
                             <button class="btn btn-primary"
-                                    [disabled]="!addActivityForm.valid"
                                     type="submit">
                                 Add
                             </button>
@@ -66,5 +72,6 @@
                 </div>
             </fieldset>
          </form>
+         <div class='has-error' *ngIf='errorMessage'><span class="help-block errorsblock">{{errorMessage}}</span></div>
     </div>
 </div>
