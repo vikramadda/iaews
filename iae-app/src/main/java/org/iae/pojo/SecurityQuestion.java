@@ -17,7 +17,7 @@ public class SecurityQuestion {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 
-    @JsonIgnore
+    //@JsonIgnore
     private String name;
     
     @Transient
