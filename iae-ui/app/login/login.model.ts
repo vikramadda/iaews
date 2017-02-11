@@ -1,10 +1,22 @@
 export class User {
-	
-	constructor(public firstName ?: string,
-        public lastName ?: string,
-        public email ?: string,
-        public phone ?: string,
-        public address1 ?: string,
-        public address2 ?: string,
-        public password ?: string) { }
+	public id:number=0;
+	public name:string='';
+	public password:string='';
+	public mobile:string='';
+	public email:string='';
+	public role:string='';
+	public securityQuestionList:SecurityQuestion[]=[];
+}
+
+export class SecurityQuestion {
+	public id:number=0;
+	public name:string='';
+	public hint:string='';
+	public answer:string='';
+}
+
+export class Role {
+	public id:number;
+	public name:string='';
+	public description:string='';
 }

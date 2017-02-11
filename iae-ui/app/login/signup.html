@@ -77,8 +77,7 @@
                         <input id="address1Id"
                                type="text" 
                                class="form-control col-md-8" 
-                               formControlName="address1"
-                               placeholder="Address 1 (required)"/>
+                               formControlName="address1"/>
                         <span class="col-md-8 help-block" *ngIf="displayMessage.address1">
                             {{ displayMessage.address1 }}
                         </span>
@@ -92,8 +91,7 @@
                         <input id="address2Id"
                                type="text" 
                                class="form-control col-md-8" 
-                               formControlName="address2"
-                               placeholder="Address 2"/>
+                               formControlName="address2"/>
                         <span class="col-md-8 help-block" *ngIf="displayMessage.address2">
                             {{ displayMessage.address2 }}
                         </span>
@@ -107,7 +105,7 @@
                                for="passwordId">Password</label>
                         <div class="col-md-8">
                             <input id="passwordId"
-                                   type="text" 
+                                   type="password" 
                                    class="form-control col-md-8" 
                                    formControlName="password"
                                    placeholder="Password (required)"/>
@@ -122,7 +120,7 @@
                                for="confirmPasswordId">Confirm Password</label>
                         <div class="col-md-8">
                             <input id="confirmPasswordId"
-                                   type="text" 
+                                   type="password" 
                                    class="form-control col-md-8" 
                                    formControlName="confirmPassword"
                                    placeholder="Confirm Password (required)"/>
@@ -131,11 +129,96 @@
                                     {{ displayMessage.confirmPassword }}
                                 </span>
                                 <span *ngIf="signupForm.get('passwordGroup').errors?.match">
-                                    Confirmation does not match the password.
+                                    {{ validationMessages.passwordMisMatch.error }}
                                 </span>
                             </span>
                         </div>
                     </div>
+                </div>
+                <div class="form-group"
+                    [ngClass]="{'has-error': displayMessage.role }">
+                    <label class="col-md-3 control-label" 
+                           for="roleId">Role</label>
+                    <div class="col-md-8">
+                      <select id="roleId" 
+                              class="form-control col-md-8"  
+                              formControlName="role" >
+                          <option *ngFor="let item of rolesList" [value]="item.id">  
+                          {{item.name}}
+                          </option>
+                      </select>
+                      <span class="col-md-8 help-block" *ngIf="displayMessage.role">
+                            {{ displayMessage.role }}
+                      </span>
+                    </div>
+                </div>
+                <div class="form-group"
+                    [ngClass]="{'has-error': displayMessage.securityQuestion1 }">
+                    <label class="col-md-3 control-label" 
+                           for="securityQuestion1Id">Security Question 1</label>
+                    <div class="col-md-8">
+                      <select id="securityQuestion1Id" 
+                              class="form-control col-md-8"  
+                              formControlName="securityQuestion1">
+                          <option *ngFor="let item of securityQuestionsList" [value]="item.name">  
+                          {{item.name}}
+                          </option>
+                      </select>
+                      <span class="col-md-8 help-block" *ngIf="displayMessage.securityQuestion1">
+                            {{ displayMessage.securityQuestion1 }}
+                      </span>
+                    </div>
+                </div>
+                <div class="form-group"
+                     [ngClass]="{'has-error': displayMessage.securityAnswer1 }">
+                    <label class="col-md-3 control-label" 
+                           for="securityAnswer1Id">Security Answer 1</label>
+                    <div class="col-md-8">
+                        <input id="securityAnswer1Id"
+                               type="text" 
+                               class="form-control col-md-8"  
+                               formControlName="securityAnswer1"
+                               placeholder="Security Answer 1 (required)"/>
+                        <span class="col-md-8 help-block" *ngIf="displayMessage.securityAnswer1">
+                            {{ displayMessage.securityAnswer1 }}
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group"
+                    [ngClass]="{'has-error': displayMessage.securityQuestion2 }">
+                    <label class="col-md-3 control-label" 
+                           for="securityQuestion2Id">Security Question 2</label>
+                    <div class="col-md-8">
+                      <select id="securityQuestion2Id" 
+                              class="form-control col-md-8"  
+                              formControlName="securityQuestion2">
+                          <option *ngFor="let item of securityQuestionsList" [value]="item.name">  
+                          {{item.name}}
+                          </option>
+                      </select>
+                      <span class="col-md-8 help-block" *ngIf="displayMessage.securityQuestion2">
+                            {{ displayMessage.securityQuestion2 }}
+                      </span>
+                    </div>
+                </div>
+                <div class="form-group"
+                     [ngClass]="{'has-error': displayMessage.securityAnswer2 }">
+                    <label class="col-md-3 control-label" 
+                           for="securityAnswer2Id">Security Answer 2</label>
+                    <div class="col-md-8">
+                        <input id="securityAnswer2Id"
+                               type="text" 
+                               class="form-control col-md-8"  
+                               formControlName="securityAnswer2"
+                               placeholder="Security Answer2 (required)"/>
+                        <span class="col-md-8 help-block" *ngIf="displayMessage.securityAnswer2">
+                            {{ displayMessage.securityAnswer2 }}
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group" *ngIf="errorMessage"
+                     [ngClass]="{'has-error': errorMessage }">
+                    <label class=" col-md-12 control-label"> {{errorMessage}} </label>  
                 </div>
                 <div class="form-group">
                     <div class="col-md-4 col-md-offset-4">
