@@ -29,7 +29,6 @@ export class SignupComponent implements OnInit {
 	private validationMessages: { [key: string]: { [key: string]: string } };
 	private genericValidator: GenericValidator;
 	private signupForm: FormGroup;
-	private errorMessage:string;
 
 	rolesList:Role[];
 	securityQuestionsList:SecurityQuestion[];
