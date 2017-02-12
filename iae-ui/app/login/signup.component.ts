@@ -8,6 +8,8 @@ import { Router } from '@angular/router';
 import { GenericValidator } from '../utils/generic-validator';
 import { MyValidators } from '../utils/field-validators';
 import { LoginService } from './login.service';
+import { DialogService } from '../dialog/dialog.service';
+import { AlertComponent } from '../dialog/alert.component';
 
 import { User, SecurityQuestion, Role } from './login.model';
 
@@ -35,7 +37,8 @@ export class SignupComponent implements OnInit {
 
 	constructor ( private fb: FormBuilder,
 			  private loginservice:LoginService,
-			  private router: Router
+			  private router: Router,
+			  private dialogService:DialogService
 			) 
 	{
 		
@@ -100,8 +103,6 @@ export class SignupComponent implements OnInit {
 			email: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+')]],
 			phone:['', [Validators.required, Validators.minLength(10),Validators.maxLength(10),
 					Validators.pattern('[7-9]+[0-9]+')]	],
-			address1:'',
-			address2:'',
 			passwordGroup:this.fb.group({
 				password:['', [Validators.required, Validators.minLength(3)]],
 				confirmPassword: '',
@@ -130,8 +131,6 @@ export class SignupComponent implements OnInit {
 			lastName:'',
 			email:'',
 			phone:'',
-			address1:'',
-			address2:'',
 			passwordGroup:{ password:'', confirmPassword:''},
 			role:'',
 			securityQuestion1:'',
@@ -146,8 +145,8 @@ export class SignupComponent implements OnInit {
 		let newUser:User=this.convertToModel(this.signupForm.value);
 		console.log('User'+JSON.stringify(newUser));
 		this.loginservice.saveUser(newUser).subscribe(
-			message => console.log("final message",message),
-			error => this.errorMessage=error
+			message => this.doAlert("Success!","User Registration success"),
+			error => this.doAlert("Error!",error)
 			);
 	}
 
@@ -180,5 +179,10 @@ export class SignupComponent implements OnInit {
 		return newUser;
 	}
 
+	private doAlert(titleStr:string, messageStr:string){
+		this.dialogService.addDialog(AlertComponent, {
+		      title:titleStr,
+		      message:messageStr});
+	}
 
 }
