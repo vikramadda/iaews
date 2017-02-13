@@ -14,17 +14,17 @@ export class NumberValidators {
 
 export class MyValidators {
 
-   static passwordMatcher(c: AbstractControl): {[key: string]: boolean} | null {
-    let passwordControl = c.get('password');
-    let confirmControl = c.get('confirmPassword');
+    static passwordMatcher(c: AbstractControl): {[key: string]: boolean} | null {
+        let passwordControl = c.get('password');
+        let confirmControl = c.get('confirmPassword');
 
-    if (passwordControl.pristine || confirmControl.pristine) {
-      return null;
+        if (passwordControl.pristine || confirmControl.pristine) {
+          return null;
+        }
+        if (passwordControl.value === confirmControl.value) {
+            return null;
+        }
+        return { 'match': true };
     }
-    if (passwordControl.value === confirmControl.value) {
-        return null;
-    }
-    return { 'match': true };
- }
 
 }

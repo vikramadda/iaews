@@ -1,4 +1,4 @@
---Roles table
+/* Roles table */
 CREATE TABLE roles (
   id bigint(50) NOT NULL auto_increment,
   name varchar(80) default NULL,
@@ -8,28 +8,28 @@ CREATE TABLE roles (
   KEY idx_rolename (name)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---Users table
+/* Users table */
 CREATE TABLE users (
   id int(20) NOT NULL auto_increment,
   name varchar(20) NOT NULL,
   mobile varchar(15) NOT NULL,
   password varchar(80) NOT NULL,
   email varchar(50) default NULL,
-  role int(20) NOT NULL,
+  role bigint(50) NOT NULL,
   securityquestions varchar(200) default NULL,
   PRIMARY KEY  (id),
   UNIQUE KEY uc_username (name),
   FOREIGN KEY (role) REFERENCES roles(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---Security Questions table
+/* Security Questions table */
 CREATE TABLE securityquestions (
   id int(80) NOT NULL auto_increment,
   name varchar(80) default NULL,
   PRIMARY KEY  (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---Documents table
+/* Documents table */
 CREATE TABLE docs (
   id INT(10) NOT NULL AUTO_INCREMENT,
   NAME VARCHAR(20) NOT NULL,
@@ -39,7 +39,7 @@ CREATE TABLE docs (
   PRIMARY KEY  (id)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
---Donations table
+/* Donations table */
 CREATE TABLE donations (
   id int(20) NOT NULL auto_increment,
   donorname varchar(50) default NULL,
@@ -51,7 +51,7 @@ CREATE TABLE donations (
   PRIMARY KEY  (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---Projects table
+/* Projects table */
 CREATE TABLE projects (
   id int(20) NOT NULL auto_increment,
   name varchar(80) NOT NULL,
@@ -63,7 +63,7 @@ CREATE TABLE projects (
   PRIMARY KEY  (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---Activities table
+/*Activities table */
 CREATE TABLE activities (
   id int(20) NOT NULL auto_increment,
   name varchar(80) NOT NULL,
@@ -80,7 +80,7 @@ CREATE TABLE activities (
   FOREIGN KEY (projectid) REFERENCES projects(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---Feedback table
+/*Feedback table */
 CREATE TABLE feedback (
   id int(20) NOT NULL auto_increment,
   activityid int(20) default NULL,
@@ -90,7 +90,7 @@ CREATE TABLE feedback (
   FOREIGN KEY (activityid) REFERENCES activities(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---Boardmembers table
+/*Boardmembers table */
 CREATE TABLE boardmembers (
   id int(20) NOT NULL auto_increment,
   name varchar(80) default NULL,

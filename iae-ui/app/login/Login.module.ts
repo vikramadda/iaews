@@ -5,9 +5,10 @@ import { SigninComponent } from './signin.component';
 import { SignupComponent} from './signup.component';
 import  { AppRoutingModule } from "../app-routing.module";
 import { ReactiveFormsModule } from '@angular/forms';
+import { IAEModalModule } from '../dialog/iae-modal.module';
 
 @NgModule({
-  imports:      [ CommonModule, HttpModule, ReactiveFormsModule, AppRoutingModule ],
+  imports:      [ CommonModule, HttpModule, ReactiveFormsModule, AppRoutingModule, IAEModalModule ],
   declarations: [ SigninComponent, SignupComponent ],
   exports : [ SigninComponent, SignupComponent ]
 })

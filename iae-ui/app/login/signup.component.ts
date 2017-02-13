@@ -8,6 +8,10 @@ import { Router } from '@angular/router';
 import { GenericValidator } from '../utils/generic-validator';
 import { MyValidators } from '../utils/field-validators';
 import { LoginService } from './login.service';
+import { DialogService } from '../dialog/dialog.service';
+import { AlertComponent } from '../dialog/alert.component';
+
+import { User, SecurityQuestion, Role } from './login.model';
 
 @Component({
   moduleId: module.id,
@@ -20,17 +24,22 @@ import { LoginService } from './login.service';
 export class SignupComponent implements OnInit {
 	@ViewChildren(FormControlName, { read: ElementRef }) formInputElements: ElementRef[];
 	
-	pageTitle:string = 'Sign Up!';
-    	displayMessage: { [key: string]: string } = {};
+	private pageTitle:string = 'Sign Up!';
+    	private displayMessage: { [key: string]: string } = {};
 	private validationMessages: { [key: string]: { [key: string]: string } };
 	private genericValidator: GenericValidator;
+	private signupForm: FormGroup;
 
-	signupForm: FormGroup;
-	errorMessage:string;
+	rolesList:Role[];
+	securityQuestionsList:SecurityQuestion[];
 
 
-	constructor(private fb: FormBuilder, 
-		private router: Router) {
+	constructor ( private fb: FormBuilder,
+			  private loginservice:LoginService,
+			  private router: Router,
+			  private dialogService:DialogService
+			) 
+	{
 		
 		this.validationMessages = {
 	            firstName: {
@@ -46,13 +55,10 @@ export class SignupComponent implements OnInit {
 	                pattern: 'Invalid email Address.'
 	            },
 	            phone: {
-	                required: 'phone number is required',
-	                minlength: 'phone number is too short.',
-	                maxlength:'Phone number is long.'
-	            },
-	            address1: {
-	                required: 'Address1 is required',
-	                minlength: 'Adress1 is too short.'
+	                required: 'Phone Number is required.',
+	                minlength: 'Phone Number should be 10 digit.',
+	                maxlength:'Phone Number should be 10 digit.',
+	                pattern: 'Invalid Phone Number.'
 	            },
 	            password: {
 	                required: 'password is required',
@@ -62,9 +68,31 @@ export class SignupComponent implements OnInit {
 	                required: 'confirm Password is required',
 	                minlength: 'confirm Password is too short.'
 	            },
+	            passwordMisMatch:{
+	            	error:'Confirmation does not match the password.',
+	            },
+	            role:{
+	            	required:'Role is required.'
+	            },
+	            securityQuestion1:{
+	            	required:'Security Question 1 is required.'
+	            },
+	            securityAnswer1:{
+	            	required:'Security Answer is required.',
+	            	minlength: 'Security answer should be minimum of 3 digits.'
+	            },
+	            securityQuestion2:{
+	            	required:'Security Question 2 is required.'
+	            },
+	            securityAnswer2:{
+	            	required:'Security Answer is required.',
+	            	minlength: 'Security answer should be minimum of 3 digits.'
+	            }
 
         	};
+
         	this.genericValidator = new GenericValidator(this.validationMessages);
+        	this.loadingDBDefaults();
 	}
 	
 	ngOnInit(): void {
@@ -72,14 +100,19 @@ export class SignupComponent implements OnInit {
 			firstName:['', [Validators.required, Validators.minLength(3)]],
 			lastName:['', [Validators.required, Validators.minLength(3)]],
 			email: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+')]],
-			phone:['', [Validators.required, Validators.minLength(10),Validators.maxLength(10)]],
-			address1:['', [Validators.required, Validators.minLength(3)]],
-			address2:'',
+			phone:['', [Validators.required, Validators.minLength(10),Validators.maxLength(10),
+					Validators.pattern('[7-9]+[0-9]+')]	],
 			passwordGroup:this.fb.group({
 				password:['', [Validators.required, Validators.minLength(3)]],
 				confirmPassword: '',
-				},{validator: MyValidators.passwordMatcher})
-			});
+				},{validator: MyValidators.passwordMatcher}),
+			
+			role:['', [Validators.required] ],
+			securityQuestion1:['', [Validators.required] ],
+			securityAnswer1:['', [Validators.required, Validators.minLength(3)] ],
+			securityQuestion2:['', [Validators.required] ],
+			securityAnswer2:['', [Validators.required,Validators.minLength(3)] ]
+		});
 	}
 
 	ngAfterViewInit(): void {
@@ -97,14 +130,58 @@ export class SignupComponent implements OnInit {
 			lastName:'',
 			email:'',
 			phone:'',
-			address1:'',
-			address2:'',
-			passwordGroup:{ password:'', confirmPassword:''}
+			passwordGroup:{ password:'', confirmPassword:''},
+			role:'',
+			securityQuestion1:'',
+			securityAnswer1:'',
+			securityQuestion2:'',
+			securityAnswer2:''
 		});		
 	}
 	
 	signup(): void {
-		console.log('signup data'+JSON.stringify(this.signupForm.value));
+		console.log('Form data'+JSON.stringify(this.signupForm.value));
+		let newUser:User=this.convertToModel(this.signupForm.value);
+		console.log('User'+JSON.stringify(newUser));
+		this.loginservice.saveUser(newUser).subscribe(
+			message => this.doAlert("Success!","User Registration success"),
+			error => this.doAlert("Error!",error)
+			);
+	}
+
+	loadingDBDefaults():void {
+		this.loginservice.listRoles().subscribe(roles => this.rolesList=roles);
+		this.loginservice.listSecurityQuestions().subscribe(securityQuestions => this.securityQuestionsList=securityQuestions);
+	}
+
+	private copyValues(srcObj:any, destObj:any):void {
+	  	for (var key in destObj) {
+	    		if(destObj.hasOwnProperty(key) && srcObj.hasOwnProperty(key))
+	      		destObj[key] = srcObj[key];
+	  	}
+	}
+	private convertToModel(formData:any): User{
+		let newUser:User=new User();
+		this.copyValues(formData, newUser);
+		newUser.name=formData.lastName+' '+formData.firstName;
+		newUser.password=formData.passwordGroup.password;
+		newUser.mobile=formData.phone;
+		
+		let sec1=new SecurityQuestion();
+		sec1.name=formData.securityQuestion1;
+		sec1.answer=formData.securityAnswer1;
+		let sec2=new SecurityQuestion();
+		sec2.name=formData.securityQuestion2;
+		sec2.answer=formData.securityAnswer2;
+		newUser.securityQuestionList.push(sec1);
+		newUser.securityQuestionList.push(sec2);
+		return newUser;
+	}
+
+	private doAlert(titleStr:string, messageStr:string){
+		this.dialogService.addDialog(AlertComponent, {
+		      title:titleStr,
+		      message:messageStr});
 	}
 
 }
