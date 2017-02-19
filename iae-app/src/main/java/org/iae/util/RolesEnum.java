@@ -54,12 +54,12 @@ public class RolesEnum {
 			return role;
 		}
 
-		public static Role getById(Long id) {
+		public static Role getById(Integer id) {
 
 			Role role = null;
 
 			for(ENUMS e : values()) {
-				if(e.id.equals(id)) {
+				if(e.id == id) {
 					role = new Role();
 					role.setId(Long.valueOf(e.id));
 					role.setName(e.name);

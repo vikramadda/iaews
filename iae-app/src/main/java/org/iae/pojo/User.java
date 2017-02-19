@@ -28,7 +28,7 @@ public class User {
 	private String password;
 	private String mobile;
 	private String email;
-	private Long role;
+	private Integer role;
 
 	@Column(name="securityquestions")
 	private String securityQuestions;
@@ -72,10 +72,10 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public Long getRole() {
+	public Integer getRole() {
 		return role;
 	}
-	public void setRole(Long role) {
+	public void setRole(Integer role) {
 		this.role = role;
 	}
 	public String getConfirmPassword() {
