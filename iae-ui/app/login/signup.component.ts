@@ -92,10 +92,10 @@ export class SignupComponent implements OnInit {
         	};
 
         	this.genericValidator = new GenericValidator(this.validationMessages);
-        	this.loadingDBDefaults();
 	}
 	
 	ngOnInit(): void {
+		this.loadingDBDefaults();
 		this.signupForm = this.fb.group({
 			firstName:['', [Validators.required, Validators.minLength(3)]],
 			lastName:['', [Validators.required, Validators.minLength(3)]],

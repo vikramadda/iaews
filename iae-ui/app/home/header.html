@@ -3,7 +3,10 @@
   		<div id="social_icons" style="display: none;">
   			<a class="facebook" target="_blank" href="http://facebook.com" alt="Facebook"></a>
   		</div>
-  		<div id="login_link">
+  		<div id="login_link" *ngIf="currentUser">
+  			<span>{{currentUser.name}}({{currentUser.role}})</span> <a (click)="logout()">Logout</a>
+  		</div>
+  		<div id="login_link" *ngIf="currentUser==undefined">
   			<a routerLink="signin">Login</a>
   		</div>
   	</div>
@@ -19,13 +22,16 @@
 				<a routerLink="activities">Projects</a>
 			</li>
 			<li>
-				<a  [routerLink]="['/activity','new']">OPPORTUNITIES</a>
+				<a routerLink="activities">OPPORTUNITIES</a>
 			</li>
 			<li>
 				<a routerLink="home">Gallery</a>
 			</li>
 			<li class="last">
-				<a routerLink="home">Contact</a>
+				<a routerLink="home">Contact US</a>
+			</li>
+			<li class="last" *ngIf="currentUser && currentUser.role ==1 ">
+				<a routerLink="admin">Admin</a>
 			</li>
 		</ul>
   	</div>

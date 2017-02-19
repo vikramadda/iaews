@@ -155,13 +155,13 @@ body {
     position: fixed;
     bottom: 0pt;
     left: 0pt;
-    background-image: linear-gradient(#5b66f9, #05202d);
+    background-image: linear-gradient(#337ab7, #337aff);
 }   
 
 .footer_contents {
 
     height:24px;
-    width: 1000px;
+    width: 100%;
     margin:auto;
     font-weight: bold;
     color: #fff;
@@ -192,7 +192,7 @@ body {
 }
 
 .panel-heading{
-  background-color: blue;
+  background-color: #337ab7;
   color: #fff;
   margin-bottom: 5px;
   padding: 5px 10px;

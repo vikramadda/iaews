@@ -9,9 +9,10 @@ import  { AppRoutingModule } from "../app-routing.module";
 
 import { UtilsModule } from '../utils/utils.module';
 import { ActivityModule } from '../activities/activities.module';
+import { AdminModule } from '../admin/admin.module';
 
 @NgModule({
-  imports:      [ CommonModule , LoginModule, AppRoutingModule, UtilsModule, ActivityModule],
+  imports:      [ CommonModule ,AdminModule, LoginModule, AppRoutingModule, UtilsModule, ActivityModule],
   declarations: [ HeaderComponent, MainContainerComponent, FooterComponent ],
   exports :[ HeaderComponent, MainContainerComponent, FooterComponent ]
 })
