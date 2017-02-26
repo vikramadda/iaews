@@ -60,7 +60,7 @@ import {Image} from './image.model';
     left:0px;
     text-align:center;
     color:#fff;
-    background-color:rgba(0,0,0,0.75);
+    background-color:#284a97;
     text-transform: uppercase;
 }
 

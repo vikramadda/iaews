@@ -27,7 +27,7 @@ public class Activity {
 	private String description;
 	
 	@Temporal(TemporalType.DATE)
-	@Column(name="creationdate")
+	@Column(name="startdate")
 	private Date startDate;
 	
 	@Temporal(TemporalType.DATE)

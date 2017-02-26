@@ -15,12 +15,8 @@ import { AppConstants } from '../app.constants';
 @Injectable()
 export class LoginService {
 
-	addUserUrl :string ='http://localhost:3004/posts';
-	updateUserUrl :string ='http://localhost:3004/posts';
-	verifyUserUrl : string ='http://localhost:3004/posts';
-
 	private headers = new Headers({'Content-Type': 'application/json'});
-    	private options = new RequestOptions({ headers: this.headers });
+    private options = new RequestOptions({ headers: this.headers });
 
 	constructor(private http: Http){}
 
@@ -44,24 +40,19 @@ export class LoginService {
             .catch(this.handleError);
     	}
 
-	updateUser( user:User) :Promise<User> {
-		console.log("updating user");
-		return this.http
-			    .put(this.updateUserUrl, JSON.stringify(user), {headers: this.headers})
-			    .toPromise()
-			    .then(() => user)
-			    .catch(this.handleError);
-	}
+    	login(user: User):Observable<string> {
+        return this.http.post(AppConstants.LOGIN, user, this.options)
+            .do(data => console.log('status ' + JSON.stringify(data)))
+            .catch(this.handleError);
+    	}
 
-	verifyUser( user:User) : Promise<User> {
-		console.log("verifying user",user);
-		return this.http
-			    .post(this.verifyUserUrl, JSON.stringify(user), {headers: this.headers})
-			    .toPromise()
-			    .then(response => response.json().data as User)
-			    .catch(this.handleError);
-		
-	}
+    	getUser(userName:string): Observable<User> {
+    		const url = `${AppConstants.GET_USER}/${userName}`; 
+	    	return this.http.get(url)
+	    	  	.map(response => response.json())
+	            .do(data => console.log('status ' + JSON.stringify(data)))
+	            .catch(this.handleError);
+    	}
 
   	private handleError(error: any): Observable<any> {
     		console.error('Krishna An error occurred', error); // for demo purposes only

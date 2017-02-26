@@ -10,5 +10,5 @@ public interface RoleService {
 
 	public Role getByName(String name);
 	
-	public Role getById(Long id);
+	public Role getById(Integer id);
 }

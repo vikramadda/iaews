@@ -27,7 +27,7 @@ public class HelloController {
     	user.setName("RAJRAm");
     	user.setPassword("abc");
     	user.setConfirmPassword("abc");
-    	user.setRole(1L);
+    	user.setRole(1);
     	user.setEmail("a@b.c");
     	user.setMobile("1223");
 

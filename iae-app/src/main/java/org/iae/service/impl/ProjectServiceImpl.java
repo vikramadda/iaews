@@ -52,11 +52,10 @@ public class ProjectServiceImpl implements ProjectService {
 		logger.debug("Exit from addProject() method");
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<Project> getAllProjects() {
 		logger.debug("Entered into getAllProjects() method");
-		return (List<Project>) projectRepository.findAll();
+		return projectRepository.findAll();
 	}
 
 	@Override

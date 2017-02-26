@@ -1,9 +1,22 @@
+export class Project {
+	id:string = '';
+	name:string = '';
+	description:string = '';
+	creationDate:string = '';
+	endDate:string = '';
+	logoLocWithName:File;
+	status:string = '';
+}
 export class Activity {
-	activityId:string;
-	activityName:string;
-	project:string;
-	description:string;
-	startDate:string;
-	endDate:string;
-	
+	id:string = '';
+	name:string = '';
+	description:string = '';
+	startDate:string = '';
+	endDate:string = '';
+	actBudget:string = '';
+	estBudget:string = '';
+	status:string = '';
+	logo:string = '';
+	imagesLoc:string = '';
+	project:Project = new Project();
 }

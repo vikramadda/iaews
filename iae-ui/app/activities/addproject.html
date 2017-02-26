@@ -1,0 +1,125 @@
+<div class="panel panel-primary" style="width: 600px;margin: 0 auto;">
+    <div class="panel-heading">
+        New Project
+    </div>
+
+    <div class="panel-body">
+        <form class="form-horizontal"
+              novalidate
+              (ngSubmit)="add()"
+              [formGroup]="projectForm">
+            <fieldset>
+                <div class="form-group"
+                    [ngClass]="{'has-error': displayMessage.name }">
+                    <label class="col-md-3 control-label" 
+                           for="projectNameId">Project Name</label>
+                    <div class="col-md-6">
+                        <input id="projectNameId"
+                               type="text" 
+                               class="form-control col-md-12" 
+                               formControlName="name"
+                               placeholder="Project Name"/>
+                        <span class="col-md-8 help-block" *ngIf="displayMessage.name">
+                            {{ displayMessage.name }}
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group"
+                    [ngClass]="{'has-error': displayMessage.description }">
+                    <label class="col-md-3 control-label" 
+                           for="descriptionId">project Description</label>
+                    <div class="col-md-6">
+                        <textarea id="descriptionId"
+                               class="form-control col-md-12" 
+                               formControlName="description"
+                               placeholder="project Description"></textarea>
+                        <span class="col-md-8 help-block" *ngIf="displayMessage.description">
+                            {{ displayMessage.description }}
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group"
+                    [ngClass]="{'has-error': displayMessage.creationDate }">
+                    <label class="col-md-3 control-label" 
+                           for="creationDateId">creation Date</label>
+                    <div class="col-md-6">
+                         <input id="creationDateId"
+                               type="Date" 
+                               class="form-control col-md-12" 
+                               formControlName="creationDate"
+                               placeholder="Creation Date"/>
+                        <span class="col-md-8 help-block" *ngIf="displayMessage.creationDate">
+                            {{ displayMessage.creationDate }}
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group"
+                    [ngClass]="{'has-error': displayMessage.endDate }">
+                    <label class="col-md-3 control-label" 
+                           for="endDateId">End Date</label>
+                    <div class="col-md-6">
+                        <input id="endDateId"
+                               type="Date" 
+                               class="form-control col-md-12" 
+                               formControlName="endDate"
+                               placeholder="End Date"/>
+                        <span class="col-md-8 help-block" *ngIf="displayMessage.endDate">
+                            {{ displayMessage.endDate }}
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group"
+                    [ngClass]="{'has-error': displayMessage.logoLocWithName }">
+                    <label class="col-md-3 control-label" 
+                           for="logoLocWithNameId">logoLocWithName</label>
+                    <div class="col-md-6">
+                        <input id="logoLocWithNameId"
+                               type="file" 
+                               class="form-control col-md-12" 
+                               formControlName="logoLocWithName"
+                               placeholder="logoLocWithName"/>
+                        <span class="col-md-8 help-block" *ngIf="displayMessage.logoLocWithName">
+                            {{ displayMessage.logoLocWithName }}
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="form-group"
+                    [ngClass]="{'has-error': displayMessage.status }">
+                    <label class="col-md-3 control-label" 
+                           for="statusId">status</label>
+                    <div class="col-md-6">
+                        <select id="statusId" class="form-control col-md-12"  formControlName="status">
+                          <option *ngFor="let item of statuses" [value]="item">  
+                          {{item}}
+                          </option>
+                      </select>
+                        <span class="col-md-8 help-block" *ngIf="displayMessage.status">
+                            {{ displayMessage.status }}
+                        </span>
+                    </div>
+                </div>
+                                
+               <div class="form-group">
+                    <div class="col-md-4 col-md-offset-4">
+                        <span>
+                            <button class="btn btn-primary"
+                                    [disabled]="!projectForm.valid"
+                                    type="submit">
+                                Add
+                            </button>
+                        </span>
+                        <span>
+                            <button class="btn btn-default"
+                                    type="button" 
+                                    (click)="resetForm()">
+                                Reset
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </fieldset>
+         </form>
+         <div class='has-error' *ngIf='errorMessage'><span class="help-block errorsblock">{{errorMessage}}</span></div>
+    </div>
+</div>

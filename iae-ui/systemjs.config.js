@@ -25,6 +25,8 @@
 
 	     //file saver
 	     'file-saver': 'npm:file-saver/FileSaver.js',
+
+       'ng2-webstorage': 'node_modules/ng2-webstorage',
 	  
       // other libraries
       'rxjs':                      'npm:rxjs',
@@ -37,6 +39,10 @@
         defaultExtension: 'js'
       },
       rxjs: {
+        defaultExtension: 'js'
+      },
+      'ng2-webstorage': {
+        main: 'bundles/core.umd.js', 
         defaultExtension: 'js'
       }
     }

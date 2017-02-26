@@ -40,7 +40,7 @@ public class RoleServiceImpl implements RoleService {
 		//return roleRepository.findByNameIgnoringCase(name);
 	}
 	
-	public Role getById(Long id) {
+	public Role getById(Integer id) {
 		
 		logger.debug("Entered into getById() method for {} ", id);
 		

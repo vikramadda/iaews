@@ -1,0 +1,19 @@
+<div *ngIf="showType!='explain'">
+	<p style="font-size: 17px;"><b>EDUCATION</b></p>
+			<ul>
+				<li>21,346 children directly provided education</li>
+				<li>Infrastructure support to 34 education centres, benefitting 6,890 children</li>
+				<li>Over 8,000 children from 46 locations across India received nutrition support</li>
+				<li>6,879 school drop-outs resumed education through bridge-course</li>
+			</ul>
+			<button class="readMore" routerLink="/achievements/explain">Read More...</button>
+</div>
+
+<div class="panel panel-primary" style="width: 75%;margin: 0 auto;margin-top: 30px;margin-bottom: 15px;"  *ngIf="showType=='explain'">
+    
+
+    <div class="panel-body">
+    <h2> Achievements and success stories in detailed </h2>
+        
+    </div>
+</div>

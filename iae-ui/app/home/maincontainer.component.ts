@@ -9,8 +9,8 @@ import { Image } from '../utils/image.model';
 })
 export class MainContainerComponent  {
 	imageList: Image[] = [
-	{ "title": "Khaidi No 150", "url": "http://images.indianexpress.com/2017/01/chiranjeevi-khaidi-no-150-review-759.jpg" },
-	{ "title": "GPSK", "url": "http://www.filmjalsa.com/wp-content/uploads/2016/07/gpsk-660x330.jpg" },
-	{ "title": "OM NAMO VENKATESHAYA", "url": "http://www.atozmp3.in/wp-content/uploads/2017/01/Om-Namo-Venkatesaya-2017-CD-Cover-Front-Poster-Wallpapers.jpg" },
+	{ "title": "Image 1", "url": "https://media.children.org/cdn-8d444fdddd63420/globalassets/home-page/holiday-home-page/what-we-do.jpg" },
+	{ "title": "Image 2", "url": "https://media.children.org/cdn-8d444fdde271340/globalassets/home-page/holiday-home-page/who-we-are.jpg" },
+	{ "title": "Image 3", "url": "https://media.children.org/cdn-8d444fddd9385d0/globalassets/home-page/holiday-home-page/how-you-help.jpg" },
 	];
 }

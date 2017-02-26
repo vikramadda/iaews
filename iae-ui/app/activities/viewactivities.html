@@ -1,19 +1,17 @@
-<div>
-<h1>{{pageTitle}}</h1>
-<table>
-	<tr>
-		<th>Activity ID</th>
-		<th>Activity name</th>
-		<th>Project</th>
-		<th>Activity Description</th>
-		<th>Activity Start Date</th>
-	</tr>
-	<tr *ngFor="let activity of activities">
-		<td>{{activity.activityName}}</td>
-		<td><a [routerLink]="['/activity',activity.activityName]">{{activity.activityName}}</a></td>
-		<td>{{activity.project}}</td>
-		<td>{{activity.description}}</td>
-		<td>{{activity.startDate}}</td>
-	</tr>
-</table>
-</div>
+<h2>Activities List</h2>
+<ul>
+<li *ngFor="let activity of activities">
+	<p><b>name:&nbsp;</b>{{activity.name}}</p>
+	<p><b>description:&nbsp;</b>{{activity.description}}</p>
+	<p><b>startDate:&nbsp;</b>{{activity.startDate}}</p>
+	<p><b>endDate:&nbsp;</b>{{activity.endDate}}</p>
+	<p><b>actBudget:&nbsp;</b>{{activity.actBudget}}</p>
+	<p><b>estBudget:&nbsp;</b>{{activity.estBudget}}</p>
+	<p><b>status:&nbsp;</b>{{activity.status}}</p>
+	<p><b>logo:&nbsp;</b>{{activity.logo}}</p>
+	<p><b>imagesLoc:&nbsp;</b>{{activity.imagesLoc}}</p>
+	<p><b>actBudget:&nbsp;</b>{{activity.actBudget}}</p>
+	<p><b>project:&nbsp;</b>{{activity.project.name}}</p>
+
+</li>
+</ul>
