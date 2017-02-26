@@ -176,6 +176,9 @@ body {
     font-family: sans-serif;
     font-weight: normal;
     font-size: 16px;
+    height: 80%;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 .readMore{
   float: right;
@@ -226,6 +229,9 @@ span.highlight{
   font-size: 15px;
   font-style: italic;
   text-align: justify;
+  height: 60%;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 .supporterTalk > img{
   border-radius: 50%;
@@ -235,6 +241,6 @@ span.highlight{
   margin-right: 10px;
 }
 .supporter{
-  font-size: 17px;
+  font-size: 14px;
   font-weight: 700;
 }

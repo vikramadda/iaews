@@ -8,4 +8,13 @@ export class AppConstants{
 	public static LOGIN:string = "http://localhost:8080/login";
 	public static GET_USER:string = "http://localhost:8080/user";
 
+	//Activities
+	public static ADD_ACTIVITY:string = "http://localhost:8080/activity/add";
+	public static UPDATE_ACTIVITY:string = "http://localhost:8080/activity/update";
+	public static LIST_ACTIVITIES:string = "http://localhost:8080/activity/all";
+
+	//Projects
+	public static ADD_PROJECT:string = "http://localhost:8080/project/add";
+	public static UPDATE_PROJECT:string = "http://localhost:8080/project/update";
+	public static LIST_PROJECTS:string = "http://localhost:8080/project/all";
 }

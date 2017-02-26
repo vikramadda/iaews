@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
 				<a [routerLink]="['/activity','new']">Add New Activity</a>
 			</li>
 			<li>
-				<a [routerLink]="['/activity','new']">Add New Project</a>
+				<a [routerLink]="['/project','new']">Add New Project</a>
 			</li>
 			<li>
 				<a [routerLink]="['/upcomingevents','new']">Add Upcoming Events</a>

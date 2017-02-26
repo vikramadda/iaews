@@ -15,12 +15,8 @@ import { AppConstants } from '../app.constants';
 @Injectable()
 export class LoginService {
 
-	addUserUrl :string ='http://localhost:3004/posts';
-	updateUserUrl :string ='http://localhost:3004/posts';
-	verifyUserUrl : string ='http://localhost:3004/posts';
-
 	private headers = new Headers({'Content-Type': 'application/json'});
-    	private options = new RequestOptions({ headers: this.headers });
+    private options = new RequestOptions({ headers: this.headers });
 
 	constructor(private http: Http){}
 

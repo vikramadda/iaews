@@ -1,24 +1,24 @@
 <div class="panel panel-primary" style="width: 600px;margin: 0 auto;">
     <div class="panel-heading">
-        New Activity
+        New Project
     </div>
 
     <div class="panel-body">
         <form class="form-horizontal"
               novalidate
               (ngSubmit)="add()"
-              [formGroup]="activityForm">
+              [formGroup]="projectForm">
             <fieldset>
-            	  <div class="form-group"
+                <div class="form-group"
                     [ngClass]="{'has-error': displayMessage.name }">
                     <label class="col-md-3 control-label" 
-                           for="activityNameId">Activity Name</label>
+                           for="projectNameId">Project Name</label>
                     <div class="col-md-6">
-                        <input id="activityNameId"
+                        <input id="projectNameId"
                                type="text" 
                                class="form-control col-md-12" 
                                formControlName="name"
-                               placeholder="Activity Name"/>
+                               placeholder="Project Name"/>
                         <span class="col-md-8 help-block" *ngIf="displayMessage.name">
                             {{ displayMessage.name }}
                         </span>
@@ -27,29 +27,29 @@
                 <div class="form-group"
                     [ngClass]="{'has-error': displayMessage.description }">
                     <label class="col-md-3 control-label" 
-                           for="descriptionId">Activity Description</label>
+                           for="descriptionId">project Description</label>
                     <div class="col-md-6">
                         <textarea id="descriptionId"
                                class="form-control col-md-12" 
                                formControlName="description"
-                               placeholder="Activity Description"></textarea>
+                               placeholder="project Description"></textarea>
                         <span class="col-md-8 help-block" *ngIf="displayMessage.description">
                             {{ displayMessage.description }}
                         </span>
                     </div>
                 </div>
                 <div class="form-group"
-                    [ngClass]="{'has-error': displayMessage.startDate }">
+                    [ngClass]="{'has-error': displayMessage.creationDate }">
                     <label class="col-md-3 control-label" 
-                           for="startDateId">Start Date</label>
+                           for="creationDateId">creation Date</label>
                     <div class="col-md-6">
-                         <input id="startDateId"
+                         <input id="creationDateId"
                                type="Date" 
                                class="form-control col-md-12" 
-                               formControlName="startDate"
-                               placeholder="Start Date"/>
-                        <span class="col-md-8 help-block" *ngIf="displayMessage.startDate">
-                            {{ displayMessage.startDate }}
+                               formControlName="creationDate"
+                               placeholder="Creation Date"/>
+                        <span class="col-md-8 help-block" *ngIf="displayMessage.creationDate">
+                            {{ displayMessage.creationDate }}
                         </span>
                     </div>
                 </div>
@@ -69,35 +69,21 @@
                     </div>
                 </div>
                 <div class="form-group"
-                    [ngClass]="{'has-error': displayMessage.actBudget }">
+                    [ngClass]="{'has-error': displayMessage.logoLocWithName }">
                     <label class="col-md-3 control-label" 
-                           for="actBudgetId">Actual budget</label>
+                           for="logoLocWithNameId">logoLocWithName</label>
                     <div class="col-md-6">
-                        <input id="actBudgetId"
+                        <input id="logoLocWithNameId"
                                type="text" 
                                class="form-control col-md-12" 
-                               formControlName="actBudget"
-                               placeholder="Actual Budget"/>
-                        <span class="col-md-8 help-block" *ngIf="displayMessage.actBudget">
-                            {{ displayMessage.actBudget }}
+                               formControlName="logoLocWithName"
+                               placeholder="logoLocWithName"/>
+                        <span class="col-md-8 help-block" *ngIf="displayMessage.logoLocWithName">
+                            {{ displayMessage.logoLocWithName }}
                         </span>
                     </div>
                 </div>
-                <div class="form-group"
-                    [ngClass]="{'has-error': displayMessage.estBudget }">
-                    <label class="col-md-3 control-label" 
-                           for="estBudgetId">Estimated Budget</label>
-                    <div class="col-md-6">
-                        <input id="estBudgetId"
-                               type="text" 
-                               class="form-control col-md-12" 
-                               formControlName="estBudget"
-                               placeholder="Estimated Budget"/>
-                        <span class="col-md-8 help-block" *ngIf="displayMessage.estBudget">
-                            {{ displayMessage.estBudget }}
-                        </span>
-                    </div>
-                </div>
+                
                 <div class="form-group"
                     [ngClass]="{'has-error': displayMessage.status }">
                     <label class="col-md-3 control-label" 
@@ -113,56 +99,12 @@
                         </span>
                     </div>
                 </div>
-                <div class="form-group"
-                    [ngClass]="{'has-error': displayMessage.logo }">
-                    <label class="col-md-3 control-label" 
-                           for="logoId">Logo</label>
-                    <div class="col-md-6">
-                        <textarea id="logoId"
-                               class="form-control col-md-12" 
-                               formControlName="logo"
-                               placeholder="Logo"></textarea>
-                        <span class="col-md-8 help-block" *ngIf="displayMessage.logo">
-                            {{ displayMessage.logo }}
-                        </span>
-                    </div>
-                </div>
-                <div class="form-group"
-                    [ngClass]="{'has-error': displayMessage.imagesLoc }">
-                    <label class="col-md-3 control-label" 
-                           for="imagesLocId">Images location</label>
-                    <div class="col-md-6">
-                        <input id="imagesLocId"
-                               type="text" 
-                               class="form-control col-md-12" 
-                               formControlName="imagesLoc"
-                               placeholder="Images location"/>
-                        <span class="col-md-8 help-block" *ngIf="displayMessage.imagesLoc">
-                            {{ displayMessage.imagesLoc }}
-                        </span>
-                    </div>
-                </div>
-                <div class="form-group"
-                    [ngClass]="{'has-error': displayMessage.project }">
-                    <label class="col-md-3 control-label" 
-                           for="projectId">Project</label>
-                    <div class="col-md-6">
-                      <select id="projectId" class="form-control col-md-12"  formControlName="project">
-                          <option *ngFor="let item of projects" [value]="item|json">  
-                          {{item.name}}
-                          </option>
-                      </select>
-                      <span class="col-md-8 help-block" *ngIf="displayMessage.project">
-                            {{ displayMessage.project }}
-                      </span>
-                    </div>
-                </div>
-                
+                                
                <div class="form-group">
                     <div class="col-md-4 col-md-offset-4">
                         <span>
                             <button class="btn btn-primary"
-                                    [disabled]="!activityForm.valid"
+                                    [disabled]="!projectForm.valid"
                                     type="submit">
                                 Add
                             </button>

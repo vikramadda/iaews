@@ -13,28 +13,28 @@ import { Subscription } from 'rxjs/Subscription';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { ActivityService } from './activities.service';
-import { Activity,Project } from './activities.model';
+import { Project } from './activities.model';
 
 
 @Component({
   moduleId: module.id,
-  selector: 'add-activity',
-  templateUrl :'addactivity.html',
+  selector: 'add-project',
+  templateUrl :'addproject.html',
   styleUrls:['style.css'],
   providers :[ ActivityService ]
 })
-export class AddActivityComponent implements OnInit, AfterViewInit {
+export class AddProjectComponent implements OnInit, AfterViewInit {
 	@ViewChildren(FormControlName, { read: ElementRef }) formInputElements: ElementRef[];
-	pageTitle:string = 'Add Activity';
+	pageTitle:string = 'Add Project';
     	displayMessage: { [key: string]: string } = {};
 	private validationMessages: { [key: string]: { [key: string]: string } };
 	private genericValidator: GenericValidator;
-	activityForm: FormGroup;
-	activity:Activity;
+	projectForm: FormGroup;
+	project:Project;
 	errorMessage:string;
 	sub:Subscription;
-	statuses:String[]=["Started","Inprogress","Completed"];
-	projects:Project[];
+	statuses:Array<String>=["Started","Inprogress","Completed"];
+	projects:Array<String>=["project1","project2","project3"];
 	
 	constructor(private fb: FormBuilder, 
 		private router: Router,
@@ -49,30 +49,19 @@ export class AddActivityComponent implements OnInit, AfterViewInit {
 			description:{
 			               required: 'description is required.'
 			            },
-			startDate:{
+			creationDate:{
 			                required: 'startDate is required.'
 			            },
 			endDate:{
 			                required: 'endDate is required.'
 			            },
-			actBudget:{
-			                required: 'Actual budget is required.'
-			            },
-			estBudget:{
-			                required: 'estimated budget is required.'
-			            },
 			status:{
 			                required: 'status is required.'
 			            },
-			logo:{
+			logoLocWithName:{
 			               required: 'logo is required.'
-			            },
-			imagesLoc:{
-			                required: 'image location is required.'
-			            },
-			project:{
-			                required: 'project is required.'
 			            }
+			
         	};
         	this.genericValidator = new GenericValidator(this.validationMessages);
 	}
@@ -80,28 +69,23 @@ export class AddActivityComponent implements OnInit, AfterViewInit {
   	ngAfterViewInit(): void {
        	let controlBlurs: Observable<any>[] = this.formInputElements
             	.map((formControl: ElementRef) => Observable.fromEvent(formControl.nativeElement, 'blur'));
-      	Observable.merge(this.activityForm.valueChanges, ...controlBlurs).debounceTime(800)
+      	Observable.merge(this.projectForm.valueChanges, ...controlBlurs).debounceTime(800)
       		.subscribe(value => {
-            		this.displayMessage = this.genericValidator.processMessages(this.activityForm);
+            		this.displayMessage = this.genericValidator.processMessages(this.projectForm);
         		});
     	}
 
 	ngOnInit(): void {
-		this.loadingDBDefaults();
-		this.activityForm = this.fb.group({
+		this.projectForm = this.fb.group({
 			name:['', [Validators.required]],
 			description:['', [Validators.required]],
-			startDate:['', [Validators.required]],
+			creationDate:['', [Validators.required]],
 			endDate:['', [Validators.required]],
-			actBudget:['', [Validators.required]],
-			estBudget:['', [Validators.required]],
 			status:['', [Validators.required]],
-			logo:['', [Validators.required]],
-			imagesLoc:['', [Validators.required]],
-			project:[, [Validators.required]]
+			logoLocWithName:['', [Validators.required]]
 		});
 
-		// Read the activity Id from the route parameter
+		// Read the project Id from the route parameter
 	      this.sub = this.route.params.subscribe(
 	            params => {
 	                let id = params['id'];
@@ -115,54 +99,45 @@ export class AddActivityComponent implements OnInit, AfterViewInit {
 	}
 	
 	add(): void {
-		console.log("Projects JSON",this.projects);
-		let newActivity:Activity=this.convertToModel(this.activityForm.value);
-		newActivity.project=JSON.parse(this.activityForm.value.project);
-		console.log('Activity',JSON.stringify(newActivity));
-		this.activityService.saveActivity(newActivity).subscribe(
-			message => this.doAlert("Success!","Activity Added Successfully"),
+		console.log('Form data'+JSON.stringify(this.projectForm.value));
+		let newproject:Project=this.convertToModel(this.projectForm.value);
+		console.log('project',JSON.stringify(newproject));
+		this.activityService.saveProject(newproject).subscribe(
+			message => this.doAlert("Success!","project Added Successfully"),
 			error => this.doAlert("Error!",error)
 			);
 	}
 
-	/*read(activityId:string): void {
-		this.activityService.readActivity(activityId)
-				.subscribe((activity: Activity) => this.onProductRetrieved(activity),
+	/*read(projectId:string): void {
+		this.activityService.readProject(projectId)
+				.subscribe((project: Project) => this.onProductRetrieved(project),
                 (error: any) => this.errorMessage = <any>error);
 	}*/
 
-	onProductRetrieved(activity: Activity): void {
-       	console.log("activity read is ",activity);
-       	this.setForm(activity);
-       	console.log("activity form :",this.activityForm.value);
+	onProductRetrieved(project: Project): void {
+       	console.log("project read is ",project);
+       	this.setForm(project);
+       	console.log("project form :",this.projectForm.value);
     	}
 
 	resetForm(): void {
-		this.activityForm.setValue({
+		this.projectForm.setValue({
 			name:'',
 			description:'',
-			startDate:'',
+			creationDate:'',
 			endDate:'',
-			actBudget:'',
-			estBudget:'',
 			status:'',
-			logo:'',
-			imagesLoc:'',
-			project:null
+			logoLocWithName:'',
 		});		
 	}
-	setForm(activity:Activity): void {
-		this.activityForm.setValue({
-			name:activity.name,
-			description:activity.description,
-			startDate:activity.startDate,
-			endDate:activity.endDate,
-			actBudget:activity.actBudget,
-			estBudget:activity.estBudget,
-			status:activity.status,
-			logo:activity.logo,
-			imagesLoc:activity.imagesLoc,
-			project:activity.project
+	setForm(project:Project): void {
+		this.projectForm.setValue({
+			name:project.name,
+			description:project.description,
+			creationDate:project.creationDate,
+			endDate:project.endDate,
+			status:project.status,
+			logoLocWithName:project.logoLocWithName
 		});		
 	}
 
@@ -172,7 +147,7 @@ export class AddActivityComponent implements OnInit, AfterViewInit {
     	}
 	
 	loadingDBDefaults():void {
-		this.activityService.listProjects().subscribe(projects => this.projects=projects);
+		//this.loginservice.listRoles().subscribe(roles => this.rolesList=roles);
 		//this.loginservice.listSecurityQuestions().subscribe(securityQuestions => this.securityQuestionsList=securityQuestions);
 	}
 
@@ -182,10 +157,10 @@ export class AddActivityComponent implements OnInit, AfterViewInit {
 	      		destObj[key] = srcObj[key];
 	  	}
 	}
-	private convertToModel(formData:any): Activity{
-		let newActivity:Activity=new Activity();
-		this.copyValues(formData, newActivity);
-		return newActivity;
+	private convertToModel(formData:any): Project{
+		let newproject:Project=new Project();
+		this.copyValues(formData, newproject);
+		return newproject;
 	}
     	private doAlert(titleStr:string, messageStr:string){
 		this.dialogService.addDialog(AlertComponent, {
