@@ -4,7 +4,7 @@ export class Project {
 	description:string = '';
 	creationDate:string = '';
 	endDate:string = '';
-	logoLocWithName:string = '';
+	logoLocWithName:File;
 	status:string = '';
 }
 export class Activity {

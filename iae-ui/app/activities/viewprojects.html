@@ -1,12 +1,18 @@
-<h2>Projects List</h2>
-<ul>
-<li *ngFor="let project of projects">
-	<p><b>name:&nbsp;</b>{{project.name}}</p>
-	<p><b>description:&nbsp;</b>{{project.description}}</p>
-	<p><b>creationDate:&nbsp;</b>{{project.creationDate}}</p>
-	<p><b>endDate:&nbsp;</b>{{project.endDate}}</p>
-	<p><b>status:&nbsp;</b>{{project.status}}</p>
-	<p><b>logoLocWithName:&nbsp;</b>{{project.logoLocWithName}}</p>
+<div class="panel panel-primary" style="width: 75%;margin: 0 auto;margin-top: 30px;margin-bottom: 15px;">
+    
 
-</li>
-</ul>
+    <div class="panel-body">
+    <h2>{{pageTitle}}</h2>
+        <ul>
+		<li *ngFor="let project of projects">
+			<p><b>name:&nbsp;</b>{{project.name}}</p>
+			<p><b>description:&nbsp;</b>{{project.description}}</p>
+			<p><b>creationDate:&nbsp;</b>{{project.creationDate}}</p>
+			<p><b>endDate:&nbsp;</b>{{project.endDate}}</p>
+			<p><b>status:&nbsp;</b>{{project.status}}</p>
+			<p><b>logoLocWithName:&nbsp;</b>{{project.logoLocWithName}}</p>
+
+		</li>
+	  </ul>
+    </div>
+</div>
