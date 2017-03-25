@@ -18,4 +18,5 @@ public interface ProjectService {
 	
 	public List<Project> getAllProjectsByStatus(String status);
 
+	public Project getProjectById(Long projectId);
 }

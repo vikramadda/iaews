@@ -1,5 +1,6 @@
 package org.iae.repository;
 
+import java.util.Date;
 import java.util.List;
 
 import org.iae.pojo.Activity;
@@ -18,4 +19,8 @@ public interface ActivityRepository extends CrudRepository<Activity, Long> {
 	List<Activity> findAllByProjectId(Long project);
 	
 	List<Activity> findAllByProject(String projectName);
+
+	List<Activity> findAllByStartDateBetween(Date previousDate, Date currentDate);
+	
+	List<Activity> findAllByStartDateAfter(Date currentDate);
 }

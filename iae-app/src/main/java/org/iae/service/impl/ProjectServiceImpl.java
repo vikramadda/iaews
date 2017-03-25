@@ -69,4 +69,12 @@ public class ProjectServiceImpl implements ProjectService {
 		logger.debug("Entered into getAllProjectsByStatus() method");
 		return projectRepository.findAllByStatus(status);
 	}
+
+	@Override
+	public Project getProjectById(Long projectId) {
+		logger.debug("Entered into getProjectById(), project Id, {} ", projectId);
+		Project project = projectRepository.findOne(projectId);
+		logger.debug("Exit from getProjectById(), project Id, {} ", projectId);
+		return project;
+	}
 }
