@@ -1,27 +1,9 @@
 <div *ngIf="showType!='explain'">
 	<marquee direction="up" scrollamount="3" onmouseover="stop()" onmouseout="start()">
-                 		<a routerLink="/upcomingEvents/explain">
+                 		<a routerLink="/upcomingEvents/explain" *ngFor="let activity of activities">
                     		<p class="marquee-txt clearfix">
-                    	           	<span class="clearfix highlight">LG eyes 30% increase in sales</span>
-                        		<span class="pull-right">13 October 2016</span>
-                        	</p>
-                    	</a>
-                    	<a routerLink="/upcomingEvents/explain">
-                    		<p class="marquee-txt clearfix">
-                    	           	<span class="clearfix highlight">LG eyes 30% increase in sales</span>
-                        		<span class="pull-right">13 October 2016</span>
-                        	</p>
-                    	</a>
-                    	<a routerLink="/upcomingEvents/explain">
-                    		<p class="marquee-txt clearfix">
-                    	           	<span class="clearfix highlight">LG eyes 30% increase in sales</span>
-                        		<span class="pull-right">13 October 2016</span>
-                        	</p>
-                    	</a>
-                    	<a routerLink="/upcomingEvents/explain">
-                    		<p class="marquee-txt clearfix">
-                    	           	<span class="clearfix highlight">LG eyes 30% increase in sales</span>
-                        		<span class="pull-right">13 October 2016</span>
+                    	           	<span class="clearfix highlight">{{activity.name}}</span>
+                        		<span class="pull-right">{{activity.startDate}}</span>
                         	</p>
                     	</a>
 			</marquee>
@@ -31,7 +13,11 @@
     
 
     <div class="panel-body">
-    <h2>Upcoming events in detailed</h2>
-        
+    <h2>Upcoming events</h2>
+        <li *ngFor="let activity of activities">
+            <p>{{activity.name}}</p>
+            <p>{{activity.startDate}}</p>
+            <p>{{activity.description}}</p>
+        </li>
     </div>
 </div>

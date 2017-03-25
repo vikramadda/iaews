@@ -13,12 +13,6 @@ import { Component } from '@angular/core';
 			<li>
 				<a [routerLink]="['/project','new']">Add New Project</a>
 			</li>
-			<li>
-				<a [routerLink]="['/upcomingevents','new']">Add Upcoming Events</a>
-			</li>
-			<li>
-				<a [routerLink]="['/eventupdates','new']">Event Updates</a>
-			</li>
 		</ul>
     </div>
 </div>

@@ -4,7 +4,10 @@
   			<a class="facebook" target="_blank" href="http://facebook.com" alt="Facebook"></a>
   		</div>
   		<div id="login_link" *ngIf="currentUser">
-  			<span>{{currentUser.name}}({{currentUser.role}})</span> <a (click)="logout()">Logout</a>
+  			<span>{{currentUser.name}}
+  				<span *ngIf="currentUser && currentUser.role ==1 ">(ADMIN)</span>
+  			</span> 
+  				<a (click)="logout()">Logout</a>
   		</div>
   		<div id="login_link" *ngIf="currentUser==undefined">
   			<a routerLink="signin">Login</a>
@@ -25,10 +28,10 @@
 				<a routerLink="home">OPPORTUNITIES</a>
 			</li>
 			<li>
-				<a routerLink="home">Gallery</a>
+				<a routerLink="gallery">Gallery</a>
 			</li>
 			<li class="last">
-				<a routerLink="home">Contact US</a>
+				<a routerLink="contactus">Contact US</a>
 			</li>
 			<li class="last" *ngIf="currentUser && currentUser.role ==1 ">
 				<a routerLink="admin">Admin</a>

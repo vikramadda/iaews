@@ -33,7 +33,7 @@ export class AddActivityComponent implements OnInit, AfterViewInit {
 	activity:Activity;
 	errorMessage:string;
 	sub:Subscription;
-	statuses:String[]=["Started","Inprogress","Completed"];
+	statuses:String[]=["Upcoming","Started","Completed"];
 	projects:Project[];
 	
 	constructor(private fb: FormBuilder, 
@@ -108,7 +108,7 @@ export class AddActivityComponent implements OnInit, AfterViewInit {
 	                if(id === 'new'){
 	               	this.resetForm();
 	                }else{
-	                	//this.read(id);
+	                	this.activityService.readActivity(id).subscribe(activity => this.setForm(activity));
 	                }
 	            }
 	      );
@@ -119,10 +119,18 @@ export class AddActivityComponent implements OnInit, AfterViewInit {
 		let newActivity:Activity=this.convertToModel(this.activityForm.value);
 		newActivity.project=JSON.parse(this.activityForm.value.project);
 		console.log('Activity',JSON.stringify(newActivity));
-		this.activityService.saveActivity(newActivity).subscribe(
+		if(newActivity.id ==null){
+			this.activityService.saveActivity(newActivity).subscribe(
 			message => this.doAlert("Success!","Activity Added Successfully"),
 			error => this.doAlert("Error!",error)
 			);
+		}else{
+			this.activityService.updateActivity(newActivity).subscribe(
+			message => this.doAlert("Success!","Activity Added Successfully"),
+			error => this.doAlert("Error!",error)
+			);
+		}
+		
 	}
 
 	/*read(activityId:string): void {
@@ -152,7 +160,9 @@ export class AddActivityComponent implements OnInit, AfterViewInit {
 		});		
 	}
 	setForm(activity:Activity): void {
+			console.log("form data set");	
 		this.activityForm.setValue({
+			//id:activity.id,
 			name:activity.name,
 			description:activity.description,
 			startDate:activity.startDate,
@@ -163,7 +173,8 @@ export class AddActivityComponent implements OnInit, AfterViewInit {
 			logo:activity.logo,
 			imagesLoc:activity.imagesLoc,
 			project:activity.project
-		});		
+		});
+
 	}
 
     	onSaveComplete(): void {

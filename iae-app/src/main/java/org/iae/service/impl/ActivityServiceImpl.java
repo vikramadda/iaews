@@ -74,7 +74,7 @@ public class ActivityServiceImpl implements ActivityService {
 	public List<Activity> getAllActivitiesByProject(String projectName) {
 		logger.debug("Entered into getAllActivitiesByProject(), projectName : {} ", projectName);
 		
-		List<Activity> activityList = (List<Activity>) activityRepository.findAllByProject(projectName);
+		List<Activity> activityList = (List<Activity>) activityRepository.findAllByProjectId(Long.parseLong(projectName));
 		
 		setImages(activityList);
 		
@@ -84,9 +84,9 @@ public class ActivityServiceImpl implements ActivityService {
 	}
 
 	@Override
-	public Activity getActivityByName(String activityName) {
-		logger.debug("Entered into getActivityByName(), activityName : {} ", activityName);
-		Activity activity = activityRepository.findByName(activityName);
+	public Activity getActivityById(Long activityId) {
+		logger.debug("Entered into getActivityById(), activityId : {} ", activityId);
+		Activity activity = activityRepository.findOne(activityId);
 		
 		setImages(activity);
 		

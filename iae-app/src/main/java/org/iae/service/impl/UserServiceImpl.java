@@ -52,7 +52,7 @@ public class UserServiceImpl implements UserService {
 		
 		logger.debug("Entered into getUser(), username : {} ", userName.toLowerCase());
 		
-		User user = userRepository.findByNameAllIgnoringCase(userName);
+		User user = userRepository.findByMobileOrEmail(userName, userName);
 		
 		logger.debug("Exit from getUser() method");
 		
@@ -79,7 +79,7 @@ public class UserServiceImpl implements UserService {
 		
 		//Setting the hashed password to user to store in DB
 		user.setPassword(SecurityUtil.generateHash(user.getPassword()));
-
+		user.setEmail(user.getEmail().toLowerCase());
 		try {
 			//Save the user and returns savedUser with ID
 			savedUser = userRepository.save(user);

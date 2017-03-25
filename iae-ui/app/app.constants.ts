@@ -10,8 +10,11 @@ export class AppConstants{
 
 	//Activities
 	public static ADD_ACTIVITY:string = "http://localhost:8080/activity/add";
+	public static READ_ACTIVITY:string = "http://localhost:8080/activity/activityId/";
 	public static UPDATE_ACTIVITY:string = "http://localhost:8080/activity/update";
 	public static LIST_ACTIVITIES:string = "http://localhost:8080/activity/all";
+	public static LIST_ACTIVITIES_UPCOMING:string = "http://localhost:8080/activity/status/Upcoming";
+	public static LIST_ACTIVITIES_BY_PROJECT:string = "http://localhost:8080/activity/project/";
 
 	//Projects
 	public static ADD_PROJECT:string = "http://localhost:8080/project/add";

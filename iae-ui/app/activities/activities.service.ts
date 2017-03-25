@@ -19,23 +19,42 @@ export class ActivityService {
 
     constructor(private http: Http){}
 
-	listActivities(): Observable<Activity[]> {
+	listAllActivities(): Observable<Activity[]> {
         return this.http.get(AppConstants.LIST_ACTIVITIES)
             .map(response => response.json() )
             .do(data => console.log('status ' + JSON.stringify(data)))
             .catch(this.handleError);
     }
 
-    /*readActivity(activityId:string): Observable<Activity> {
-        const url = `${AppConstants.LIST_ACTIVITIES}/${activityId}`;
-        return this.http.get(url)
-            .map(this.extractData)
-            .do(data => console.log('readActivity: ' + JSON.stringify(data)))
-            .catch(this.handleError);    }*/
+    listUpcomingActivities(): Observable<Activity[]> {
+        return this.http.get(AppConstants.LIST_ACTIVITIES_UPCOMING)
+            .map(response => response.json() )
+            .do(data => console.log('status ' + JSON.stringify(data)))
+            .catch(this.handleError);
+    }
 
+    listActivitiesByProject(projectName:string): Observable<Activity[]> {
+        return this.http.get(AppConstants.LIST_ACTIVITIES_BY_PROJECT+projectName)
+            .map(response => response.json() )
+            .do(data => console.log('status ' + JSON.stringify(data)))
+            .catch(this.handleError);
+    }
+
+    readActivity(activityId:string): Observable<Activity> {
+        return this.http.get(AppConstants.READ_ACTIVITY+activityId)
+            .map(response => response.json() )
+            .do(data => console.log('status ' + JSON.stringify(data)))
+            .catch(this.handleError);
+    }
 
     saveActivity(activity: Activity):Observable<string> {
         return this.http.post(AppConstants.ADD_ACTIVITY, activity, this.options)
+            .do(data => console.log('status ' + JSON.stringify(data)))
+            .catch(this.handleError);
+    }
+
+    updateActivity(activity: Activity):Observable<string> {
+        return this.http.put(AppConstants.UPDATE_ACTIVITY, activity, this.options)
             .do(data => console.log('status ' + JSON.stringify(data)))
             .catch(this.handleError);
     }
