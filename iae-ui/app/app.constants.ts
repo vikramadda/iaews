@@ -18,6 +18,7 @@ export class AppConstants{
 
 	//Projects
 	public static ADD_PROJECT:string = "http://localhost:8080/project/add";
+	public static READ_PROJECT:string = "http://localhost:8080/project/projectId/";
 	public static UPDATE_PROJECT:string = "http://localhost:8080/project/update";
 	public static LIST_PROJECTS:string = "http://localhost:8080/project/all";
 }

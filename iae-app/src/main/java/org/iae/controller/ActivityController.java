@@ -63,7 +63,7 @@ public class ActivityController {
 	            .body(udpatedActivity);
 	}
 
-    @RequestMapping(path="/update", method=RequestMethod.PUT)
+    @RequestMapping(path="/update", method=RequestMethod.POST)
 	public ResponseEntity<String> updateActivity(@RequestBody Activity activity/*, HttpServletRequest request*/) {
 		
 		logger.debug("Entered into updateActivity()");

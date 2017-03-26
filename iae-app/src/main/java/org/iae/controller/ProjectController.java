@@ -61,8 +61,8 @@ public class ProjectController {
 	            .body(udpatedProject);
 	}
 
-    @RequestMapping(path="/update", method=RequestMethod.PUT)
-	public ResponseEntity<String> updateProject(@RequestBody Project project, HttpServletRequest request) {
+    @RequestMapping(path="/update", method=RequestMethod.POST)
+	public ResponseEntity<String> updateProject(@RequestBody Project project/*, HttpServletRequest request*/) {
 		
 		logger.debug("Entered into updateProject()");
 
@@ -73,7 +73,7 @@ public class ProjectController {
 		}
 		
 		try {
-			setImagesToProject(project, request);
+			//setImagesToProject(project, request);
 			
 			projectService.updateProject(project);
 		} catch(OperationFailedException e) {
@@ -139,29 +139,29 @@ public class ProjectController {
     	}
     }
 
-    @RequestMapping(path="/{projectName}", method=RequestMethod.GET)
-    public ResponseEntity<Object> getAllActivitiesByName(@PathVariable String projectName) {
+    @RequestMapping(path="projectId/{projectId}", method=RequestMethod.GET)
+    public ResponseEntity<Object> getProjectById(@PathVariable String projectId) {
 
-    	logger.debug("Entered into getProjectByName(), name {} ", projectName);
+    	logger.debug("Entered into getProjectById(), ID {} ", projectId);
 
-    	if(projectName == null) {
+    	if(projectId == null) {
     		return ResponseEntity
     				.status(HttpStatus.EXPECTATION_FAILED)
     				.body("Expected project name");
     	}
 
-    	Project project = projectService.getProjectByName(projectName);
+    	Project project = projectService.getProjectById(Long.parseLong(projectId));
 
     	logger.debug("Exit from getProjectByName()");
 
     	if(project != null) {
     		return ResponseEntity
     				.status(HttpStatus.OK)
-    				.body(projectName);
+    				.body(project);
     	} else {
     		return ResponseEntity
     				.status(HttpStatus.OK)
-    				.body("No project found with " + projectName);
+    				.body("No project found with " + projectId);
     	}
     }
     

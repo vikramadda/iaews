@@ -5,7 +5,11 @@
     <h2>{{pageTitle}}</h2>
         <ul>
 		<li *ngFor="let project of projects">
-			<p><b>name:&nbsp;</b><a  routerLink="/activities/{{project.id}}">{{project.name}}</a></p>
+			<p>
+				<b>name:&nbsp;</b>{{project.name}} &nbsp;
+				<a  routerLink="/activities/{{project.id}}">Activities</a>&nbsp;
+				<a routerLink="/project/{{project.id}}">Edit as Admin</a>
+			</p>
 			<p><b>description:&nbsp;</b>{{project.description}}</p>
 			<p><b>creationDate:&nbsp;</b>{{project.creationDate}}</p>
 			<p><b>endDate:&nbsp;</b>{{project.endDate}}</p>

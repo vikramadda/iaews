@@ -26,6 +26,13 @@ export class ActivityService {
             .catch(this.handleError);
     }
 
+    listAllProjects():Observable<Project[]> {
+        return this.http.get(AppConstants.LIST_PROJECTS)
+            .map(response => response.json() )
+            .do(data => console.log('status ' + JSON.stringify(data)))
+            .catch(this.handleError);
+    }
+
     listUpcomingActivities(): Observable<Activity[]> {
         return this.http.get(AppConstants.LIST_ACTIVITIES_UPCOMING)
             .map(response => response.json() )
@@ -54,7 +61,14 @@ export class ActivityService {
     }
 
     updateActivity(activity: Activity):Observable<string> {
-        return this.http.put(AppConstants.UPDATE_ACTIVITY, activity, this.options)
+        return this.http.post(AppConstants.UPDATE_ACTIVITY, activity, this.options)
+            .do(data => console.log('status ' + JSON.stringify(data)))
+            .catch(this.handleError);
+    }
+
+    readProject(projectId:string): Observable<Project> {
+        return this.http.get(AppConstants.READ_PROJECT+projectId)
+            .map(response => response.json() )
             .do(data => console.log('status ' + JSON.stringify(data)))
             .catch(this.handleError);
     }
@@ -65,9 +79,8 @@ export class ActivityService {
             .catch(this.handleError);
     }
 
-    listProjects():Observable<Project[]> {
-        return this.http.get(AppConstants.LIST_PROJECTS, this.options)
-            .map(response => response.json() )
+    updateProject(project: Project):Observable<string> {
+        return this.http.post(AppConstants.UPDATE_PROJECT, project, this.options)
             .do(data => console.log('status ' + JSON.stringify(data)))
             .catch(this.handleError);
     }

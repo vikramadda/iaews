@@ -19,6 +19,7 @@
                                class="form-control col-md-12" 
                                formControlName="name"
                                placeholder="Activity Name"/>
+                        <input formControlName="id" type="hidden" />
                         <span class="col-md-8 help-block" *ngIf="displayMessage.name">
                             {{ displayMessage.name }}
                         </span>
@@ -148,7 +149,7 @@
                            for="projectId">Project</label>
                     <div class="col-md-6">
                       <select id="projectId" class="form-control col-md-12"  formControlName="project">
-                          <option *ngFor="let item of projects" [value]="item|json">  
+                          <option *ngFor="let item of projects" [ngValue]="item">  
                           {{item.name}}
                           </option>
                       </select>
@@ -169,7 +170,7 @@
                         </span>
                         <span>
                             <button class="btn btn-default"
-                                    type="button" 
+                                    type="button" [disabled]="activityForm.value.id != ''"
                                     (click)="resetForm()">
                                 Reset
                             </button>

@@ -17,7 +17,7 @@ export class ViewActivitiesComponent implements OnInit {
 
 constructor(private activityService: ActivityService, private route:ActivatedRoute){}
 
-	pageTitle: string = 'Activities';
+	pageTitle: string = 'List of Activities';
 	activities : Activity[] = [];
 	errorMessage: string;
 	sub:Subscription;

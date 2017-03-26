@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl, ValidatorFn, FormArray } from '@angular/forms';
 import 'rxjs/add/operator/debounceTime';
-import { Router } from '@angular/router';
 import { ActivityService } from './activities.service';
 import { Project } from './activities.model';
 
@@ -16,12 +15,12 @@ export class ViewProjectsComponent implements OnInit {
 
 constructor(private activityService: ActivityService){}
 
-	pageTitle: string = 'Projects';
+	pageTitle: string = 'List of Projects';
 	projects : Project[] = [];
 	errorMessage: string;
 
 	ngOnInit():void {
-		this.activityService.listProjects().subscribe(projectlist => this.projects = projectlist,
+		this.activityService.listAllProjects().subscribe(projectlist => this.projects = projectlist,
                            error => this.errorMessage = <any>error);   
 	}
 }
