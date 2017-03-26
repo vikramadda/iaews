@@ -99,7 +99,7 @@ export class AddActivityComponent implements OnInit, AfterViewInit {
 			status:['', [Validators.required]],
 			logo:['', [Validators.required]],
 			imagesLoc:['', [Validators.required]],
-			project:[, [Validators.required]]
+			project:['', [Validators.required]]
 		});
 
 		// Read the activity Id from the route parameter
@@ -117,7 +117,7 @@ export class AddActivityComponent implements OnInit, AfterViewInit {
 	}
 	
 	add(): void {
-		console.log('after add',JSON.stringify(this.activityForm.value));
+		//this.activityForm.value.project = JSON.parse(this.activityForm.value.project);
 		let newActivity:Activity=this.convertToModel(this.activityForm.value);
 		console.log('Activity',JSON.stringify(newActivity));
 		if(newActivity.id ==''){
@@ -163,6 +163,7 @@ export class AddActivityComponent implements OnInit, AfterViewInit {
 			imagesLoc:activity.imagesLoc,
 			project:activity.project
 		});
+		console.log("daaaataa",this.activityForm.value.project);
 	}
 
     	onSaveComplete(): void {

@@ -148,11 +148,12 @@
                     <label class="col-md-3 control-label" 
                            for="projectId">Project</label>
                     <div class="col-md-6">
-                      <select id="projectId" class="form-control col-md-12"  formControlName="project">
+                      <select id="projectId" class="form-control col-md-12"  formControlName="project" 
+                      [(ngModel)]="project">
                           <option *ngFor="let item of projects" [ngValue]="item">  
                           {{item.name}}
                           </option>
-                      </select>
+                      </select><p *ngIf="project">{{project.name}}</p>
                       <span class="col-md-8 help-block" *ngIf="displayMessage.project">
                             {{ displayMessage.project }}
                       </span>
