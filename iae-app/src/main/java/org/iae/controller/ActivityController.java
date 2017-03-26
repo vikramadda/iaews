@@ -116,6 +116,26 @@ public class ActivityController {
     	}
     }
 
+    @RequestMapping(path="/id/{activityId}", method=RequestMethod.GET)
+    public ResponseEntity<Object> getActivityById(@PathVariable Long activityId) {
+
+    	logger.debug("Entered into getActivityById(), Activity Id : ", activityId);
+
+    	Activity activities = activityService.getActivityById(activityId);
+
+    	logger.debug("Exit from getActivityById(), Activity Id : ", activityId);
+
+    	if(activities != null) {
+    		return ResponseEntity
+    				.status(HttpStatus.OK)
+    				.body(activities);
+    	} else {
+    		return ResponseEntity
+    				.status(HttpStatus.OK)
+    				.body("No activity available by Id : " + activityId);	
+    	}
+    }
+
     @RequestMapping(path="/status/{status}", method=RequestMethod.GET)
     public ResponseEntity<Object> getAllActivitiesByStatus(@PathVariable String status) {
 
@@ -193,7 +213,47 @@ public class ActivityController {
     				.body("No activites found for the project " + projectName);
     	}
     }
-    
+
+    @RequestMapping(path="/recent", method=RequestMethod.GET)
+    public ResponseEntity<Object> getRecentActivities() {
+
+    	logger.debug("Entered into getRecentActivities()");
+
+    	List<Activity> activities = activityService.getAllRecentActivities();
+
+    	logger.debug("Exit from getRecentActivities()");
+
+    	if(activities != null) {
+    		return ResponseEntity
+    				.status(HttpStatus.OK)
+    				.body(activities);
+    	} else {
+    		return ResponseEntity
+    				.status(HttpStatus.OK)
+    				.body("No Recent activites found");
+    	}
+    }
+
+    @RequestMapping(path="/upcoming", method=RequestMethod.GET)
+    public ResponseEntity<Object> getUpcomingActivities() {
+
+    	logger.debug("Entered into getUpcomingActivities()");
+
+    	List<Activity> activities = activityService.getAllUpcomingActivities();
+
+    	logger.debug("Exit from getUpcomingActivities()");
+
+    	if(activities != null) {
+    		return ResponseEntity
+    				.status(HttpStatus.OK)
+    				.body(activities);
+    	} else {
+    		return ResponseEntity
+    				.status(HttpStatus.OK)
+    				.body("No upcoming activites found");
+    	}
+    }
+
     private void setImagesToActivity(Activity activity, HttpServletRequest request) {
     	
 		String[] fileNamesArray = request.getParameterMap().get(IAEContants.PARAM_FILE_NAMES);

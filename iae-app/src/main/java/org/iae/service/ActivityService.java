@@ -16,8 +16,13 @@ public interface ActivityService {
 	
 	public List<Activity> getAllActivitiesByProject(String projectName);
 	
+  public Activity getActivityByName(String activityName);
+	
+	public Activity getActivityById(Long activityId);
+	
 	public List<Activity> getAllActivitiesByStatus(String status);
 
-	Activity getActivityById(Long activityId);
-	
+	public List<Activity> getAllRecentActivities();
+
+  public List<Activity> getAllUpcomingActivities();
 }

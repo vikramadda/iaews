@@ -2,6 +2,8 @@ package org.iae.service.impl;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.iae.exception.ObjectNotFoundException;
@@ -56,7 +58,6 @@ public class ActivityServiceImpl implements ActivityService {
 		logger.debug("Exit from updateActivity()");
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<Activity> getAllActivities() {
 		logger.debug("Entered into getAllActivities()");
@@ -101,7 +102,23 @@ public class ActivityServiceImpl implements ActivityService {
 		logger.debug("Exit from getAllActivitiesByStatus(), status : {} ", status);
 		return activityList;
 	}
+
+	public List<Activity> getAllRecentActivities() {
+		logger.debug("Entered into getAllRecentActivities()");
+		Calendar c = Calendar.getInstance();
+		c.add(Calendar.MONTH, -6);
+		List<Activity> activityList = (List<Activity>) activityRepository.findAllByStartDateBetween(c.getTime(), new Date());
+		logger.debug("Exit from getAllRecentActivities()");
+		return activityList;
+	}
 	
+	public List<Activity> getAllUpcomingActivities() {
+		logger.debug("Entered into getAllUpcomingActivities()");
+		List<Activity> upcomingActivities = activityRepository.findAllByStartDateAfter(new Date());
+		logger.debug("Exit from getAllUpcomingActivities()");
+		return upcomingActivities;
+	}
+
 	private void setImages(List<Activity> activityList) {
 		
 		if(activityList != null && activityList.size() > 0) {
@@ -126,5 +143,13 @@ public class ActivityServiceImpl implements ActivityService {
 				activity.setImagesURL(imagesForActivity);
 			}
 		}
+	}
+
+	@Override
+	public Activity getActivityById(Long activityId) {
+		logger.debug("Entered into getActivityById(), activity Id, {} ", activityId);
+		Activity activity = activityRepository.findOne(activityId);
+		logger.debug("Exit from getActivityById(), activity Id, {} ", activityId);
+		return activity;
 	}
 }
