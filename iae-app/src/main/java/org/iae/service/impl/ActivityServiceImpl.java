@@ -85,16 +85,6 @@ public class ActivityServiceImpl implements ActivityService {
 	}
 
 	@Override
-	public Activity getActivityById(Long activityId) {
-		logger.debug("Entered into getActivityById(), activityId : {} ", activityId);
-		Activity activity = activityRepository.findOne(activityId);
-		
-		setImages(activity);
-		
-		return activity;
-	}
-
-	@Override
 	public List<Activity> getAllActivitiesByStatus(String status) {
 		logger.debug("Entered into getAllActivitiesByStatus(), status : {} ", status);
 		List<Activity> activityList = (List<Activity>) activityRepository.findAllByStatus(status);
@@ -149,6 +139,7 @@ public class ActivityServiceImpl implements ActivityService {
 	public Activity getActivityById(Long activityId) {
 		logger.debug("Entered into getActivityById(), activity Id, {} ", activityId);
 		Activity activity = activityRepository.findOne(activityId);
+		//setImages(activity);
 		logger.debug("Exit from getActivityById(), activity Id, {} ", activityId);
 		return activity;
 	}

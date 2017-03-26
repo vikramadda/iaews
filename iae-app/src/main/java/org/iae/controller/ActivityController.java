@@ -32,7 +32,7 @@ public class ActivityController {
 	private ActivityService activityService;
 
     @RequestMapping(path="/add", method=RequestMethod.POST)
-	public ResponseEntity<Object> addActivity(@RequestBody Activity activity, HttpServletRequest request) {
+	public ResponseEntity<Object> addActivity(@RequestBody Activity activity/*, HttpServletRequest request*/) {
 		
 		logger.debug("Entered into addActivity()");
 
@@ -46,7 +46,7 @@ public class ActivityController {
 		
 		try {
 
-			setImagesToActivity(activity, request);
+			//setImagesToActivity(activity, request);
 
 			udpatedActivity = activityService.addActivity(activity);
 			

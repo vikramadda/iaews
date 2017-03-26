@@ -37,8 +37,7 @@ public class ProjectController {
 	private ProjectService projectService;
 
     @RequestMapping(path="/add", method=RequestMethod.POST)
-    public ResponseEntity<Object> addProject(@RequestBody Project project, @RequestParam("file") MultipartFile[] files) {
-
+    public ResponseEntity<Object> addProject(@RequestBody Project project/*, @RequestParam("file") MultipartFile[] files*/) {
     	logger.debug("Entered into addProject()");
 
     	Project udpatedProject = null;
@@ -50,8 +49,7 @@ public class ProjectController {
     	}
 
     	try {
-    		setImagesToProject(project, files);
-    		//setImagesToProject(project, request);
+    		//setImagesToProject(project, files);
     		udpatedProject = projectService.addProject(project);
     	} catch(OperationFailedException e) {
     		return ResponseEntity
@@ -67,7 +65,7 @@ public class ProjectController {
     }
 
  @RequestMapping(path="/update", method=RequestMethod.POST)
- public ResponseEntity<String> updateProject(@RequestBody Project project, @RequestParam("file") MultipartFile[] files) {
+ public ResponseEntity<String> updateProject(@RequestBody Project project/*, @RequestParam("file") MultipartFile[] files*/) {
 	
 		logger.debug("Entered into updateProject()");
 
@@ -78,7 +76,7 @@ public class ProjectController {
 		}
 		
 		try {
-    	setImagesToProject(project, files);
+    	//setImagesToProject(project, files);
 			projectService.updateProject(project);
 		} catch(OperationFailedException e) {
 			return ResponseEntity
