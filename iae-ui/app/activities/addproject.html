@@ -19,6 +19,7 @@
                                class="form-control col-md-12" 
                                formControlName="name"
                                placeholder="Project Name"/>
+                               <input formControlName="id" type="hidden" />
                         <span class="col-md-8 help-block" *ngIf="displayMessage.name">
                             {{ displayMessage.name }}
                         </span>
@@ -74,7 +75,7 @@
                            for="logoLocWithNameId">logoLocWithName</label>
                     <div class="col-md-6">
                         <input id="logoLocWithNameId"
-                               type="file" 
+                               type="text" 
                                class="form-control col-md-12" 
                                formControlName="logoLocWithName"
                                placeholder="logoLocWithName"/>

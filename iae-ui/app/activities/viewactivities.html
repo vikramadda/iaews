@@ -1,7 +1,7 @@
-<h2>Activities List</h2>
+<h2>{{pageTitle}}</h2>
 <ul>
 <li *ngFor="let activity of activities">
-	<p><b>name:&nbsp;</b>{{activity.name}}</p>
+	<p><b>name:&nbsp;</b>{{activity.name}}&nbsp;<a routerLink="/activity/{{activity.id}}">Edit as Admin</a></p>
 	<p><b>description:&nbsp;</b>{{activity.description}}</p>
 	<p><b>startDate:&nbsp;</b>{{activity.startDate}}</p>
 	<p><b>endDate:&nbsp;</b>{{activity.endDate}}</p>

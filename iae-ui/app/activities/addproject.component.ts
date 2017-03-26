@@ -33,8 +33,7 @@ export class AddProjectComponent implements OnInit, AfterViewInit {
 	project:Project;
 	errorMessage:string;
 	sub:Subscription;
-	statuses:Array<String>=["Started","Inprogress","Completed"];
-	projects:Array<String>=["project1","project2","project3"];
+	statuses:String[]=["Upcoming","Started","Completed"];
 	
 	constructor(private fb: FormBuilder, 
 		private router: Router,
@@ -77,6 +76,7 @@ export class AddProjectComponent implements OnInit, AfterViewInit {
 
 	ngOnInit(): void {
 		this.projectForm = this.fb.group({
+			id:'',
 			name:['', [Validators.required]],
 			description:['', [Validators.required]],
 			creationDate:['', [Validators.required]],
@@ -89,10 +89,11 @@ export class AddProjectComponent implements OnInit, AfterViewInit {
 	      this.sub = this.route.params.subscribe(
 	            params => {
 	                let id = params['id'];
-	                if(id === 'new'){
+	                console.log("id=",id);
+	                if(id == 'new'){
 	               	this.resetForm();
 	                }else{
-	                	//this.read(id);
+	                	this.activityService.readProject(id).subscribe(project => this.setForm(project));
 	                }
 	            }
 	      );
@@ -102,26 +103,22 @@ export class AddProjectComponent implements OnInit, AfterViewInit {
 		console.log('Form data'+JSON.stringify(this.projectForm.value));
 		let newproject:Project=this.convertToModel(this.projectForm.value);
 		console.log('project',JSON.stringify(newproject));
-		this.activityService.saveProject(newproject).subscribe(
-			message => this.doAlert("Success!","project Added Successfully"),
+		if(newproject.id ==''){
+			this.activityService.saveProject(newproject).subscribe(
+			message => this.doAlert("Success!","Project Added Successfully"),
 			error => this.doAlert("Error!",error)
 			);
+		}else{
+			this.activityService.updateProject(newproject).subscribe(
+			message => this.doAlert("Success!","Project Updated Successfully"),
+			error => this.doAlert("Error!",error)
+			);
+		}
 	}
-
-	/*read(projectId:string): void {
-		this.activityService.readProject(projectId)
-				.subscribe((project: Project) => this.onProductRetrieved(project),
-                (error: any) => this.errorMessage = <any>error);
-	}*/
-
-	onProductRetrieved(project: Project): void {
-       	console.log("project read is ",project);
-       	this.setForm(project);
-       	console.log("project form :",this.projectForm.value);
-    	}
 
 	resetForm(): void {
 		this.projectForm.setValue({
+			id:'',
 			name:'',
 			description:'',
 			creationDate:'',
@@ -132,6 +129,7 @@ export class AddProjectComponent implements OnInit, AfterViewInit {
 	}
 	setForm(project:Project): void {
 		this.projectForm.setValue({
+			id:project.id,
 			name:project.name,
 			description:project.description,
 			creationDate:project.creationDate,
@@ -143,14 +141,9 @@ export class AddProjectComponent implements OnInit, AfterViewInit {
 
     	onSaveComplete(): void {
         	this.resetForm();
-        	this.router.navigate(['/activities']);
+        	this.router.navigate(['/projects']);
     	}
 	
-	loadingDBDefaults():void {
-		//this.loginservice.listRoles().subscribe(roles => this.rolesList=roles);
-		//this.loginservice.listSecurityQuestions().subscribe(securityQuestions => this.securityQuestionsList=securityQuestions);
-	}
-
 	private copyValues(srcObj:any, destObj:any):void {
 	  	for (var key in destObj) {
 	    		if(destObj.hasOwnProperty(key) && srcObj.hasOwnProperty(key))

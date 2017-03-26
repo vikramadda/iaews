@@ -59,9 +59,9 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 
 	@Override
-	public Project getProjectByName(String name) {
+	public Project getProjectById(Long id) {
 		logger.debug("Entered into getProjectByName() method");
-		return projectRepository.findByName(name);
+		return projectRepository.findOne(id);
 	}
 
 	@Override

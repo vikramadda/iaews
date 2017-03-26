@@ -12,11 +12,9 @@ public interface ActivityRepository extends CrudRepository<Activity, Long> {
 
 	List<Activity> findAll();
 	
-	Activity findByName(String name);
-	
 	List<Activity> findAllByStatus(String status);
 	
-	List<Activity> findAllByProjectId(Long project);
+	List<Activity> findAllByProjectId(Long projectId);
 	
 	List<Activity> findAllByProject(String projectName);
 

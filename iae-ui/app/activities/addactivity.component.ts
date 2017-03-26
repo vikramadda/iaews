@@ -33,7 +33,7 @@ export class AddActivityComponent implements OnInit, AfterViewInit {
 	activity:Activity;
 	errorMessage:string;
 	sub:Subscription;
-	statuses:String[]=["Started","Inprogress","Completed"];
+	statuses:String[]=["Upcoming","Started","Completed"];
 	projects:Project[];
 	
 	constructor(private fb: FormBuilder, 
@@ -89,6 +89,7 @@ export class AddActivityComponent implements OnInit, AfterViewInit {
 	ngOnInit(): void {
 		this.loadingDBDefaults();
 		this.activityForm = this.fb.group({
+			id:'',
 			name:['', [Validators.required]],
 			description:['', [Validators.required]],
 			startDate:['', [Validators.required]],
@@ -105,40 +106,37 @@ export class AddActivityComponent implements OnInit, AfterViewInit {
 	      this.sub = this.route.params.subscribe(
 	            params => {
 	                let id = params['id'];
-	                if(id === 'new'){
+	                console.log("id=",id);
+	                if(id == 'new'){
 	               	this.resetForm();
 	                }else{
-	                	//this.read(id);
+	                	this.activityService.readActivity(id).subscribe(activity => this.setForm(activity));
 	                }
 	            }
 	      );
 	}
 	
 	add(): void {
-		console.log("Projects JSON",this.projects);
+		console.log('after add',JSON.stringify(this.activityForm.value));
 		let newActivity:Activity=this.convertToModel(this.activityForm.value);
-		newActivity.project=JSON.parse(this.activityForm.value.project);
 		console.log('Activity',JSON.stringify(newActivity));
-		this.activityService.saveActivity(newActivity).subscribe(
+		if(newActivity.id ==''){
+			this.activityService.saveActivity(newActivity).subscribe(
 			message => this.doAlert("Success!","Activity Added Successfully"),
 			error => this.doAlert("Error!",error)
 			);
+		}else{
+			this.activityService.updateActivity(newActivity).subscribe(
+			message => this.doAlert("Success!","Activity Updated Successfully"),
+			error => this.doAlert("Error!",error)
+			);
+		}
+		
 	}
-
-	/*read(activityId:string): void {
-		this.activityService.readActivity(activityId)
-				.subscribe((activity: Activity) => this.onProductRetrieved(activity),
-                (error: any) => this.errorMessage = <any>error);
-	}*/
-
-	onProductRetrieved(activity: Activity): void {
-       	console.log("activity read is ",activity);
-       	this.setForm(activity);
-       	console.log("activity form :",this.activityForm.value);
-    	}
 
 	resetForm(): void {
 		this.activityForm.setValue({
+			id:'',
 			name:'',
 			description:'',
 			startDate:'',
@@ -153,6 +151,7 @@ export class AddActivityComponent implements OnInit, AfterViewInit {
 	}
 	setForm(activity:Activity): void {
 		this.activityForm.setValue({
+			id:activity.id,
 			name:activity.name,
 			description:activity.description,
 			startDate:activity.startDate,
@@ -163,7 +162,7 @@ export class AddActivityComponent implements OnInit, AfterViewInit {
 			logo:activity.logo,
 			imagesLoc:activity.imagesLoc,
 			project:activity.project
-		});		
+		});
 	}
 
     	onSaveComplete(): void {
@@ -172,8 +171,7 @@ export class AddActivityComponent implements OnInit, AfterViewInit {
     	}
 	
 	loadingDBDefaults():void {
-		this.activityService.listProjects().subscribe(projects => this.projects=projects);
-		//this.loginservice.listSecurityQuestions().subscribe(securityQuestions => this.securityQuestionsList=securityQuestions);
+		this.activityService.listAllProjects().subscribe(projects => this.projects=projects);
 	}
 
 	private copyValues(srcObj:any, destObj:any):void {

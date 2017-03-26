@@ -14,8 +14,6 @@ public interface ProjectService {
 	
 	public List<Project> getAllProjects();
 	
-	public Project getProjectByName(String name);
-	
 	public List<Project> getAllProjectsByStatus(String status);
 
 	public Project getProjectById(Long projectId);

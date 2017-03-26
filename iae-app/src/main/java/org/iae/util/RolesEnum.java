@@ -45,7 +45,7 @@ public class RolesEnum {
 			for(ENUMS e : values()) {
 				if(e.name.equalsIgnoreCase(name)) {
 					role = new Role();
-					role.setId(Long.valueOf(e.id));
+					role.setId(Integer.valueOf(e.id));
 					role.setName(e.name);
 					role.setDescription(e.description);
 					break;
@@ -61,7 +61,7 @@ public class RolesEnum {
 			for(ENUMS e : values()) {
 				if(e.id == id) {
 					role = new Role();
-					role.setId(Long.valueOf(e.id));
+					role.setId(Integer.valueOf(e.id));
 					role.setName(e.name);
 					role.setDescription(e.description);
 					break;
@@ -77,7 +77,7 @@ public class RolesEnum {
 
 			for(ENUMS e : values()) {
 				Role role = new Role();
-				role.setId(Long.valueOf(e.id));
+				role.setId(Integer.valueOf(e.id));
 				role.setName(e.name);
 				role.setDescription(e.description);
 				roleList.add(role);

@@ -15,6 +15,8 @@ import { IntroductionComponent } from './home/introduction.component';
 import { UpComingEventsComponent } from './home/upcomingevents.component';
 import { SupportersTalkComponent } from './home/supporterstalk.component';
 import { AchievementsComponent} from './home/achievements.components';
+import { ContactUSComponent } from './home/contactus.component';
+import { GalleryComponent } from './home/gallery.component';
 
 
 const appRoutes: Routes = [
@@ -24,13 +26,15 @@ const appRoutes: Routes = [
   { path: 'home',          component: MainContainerComponent },
   { path: 'activity/:id',  component: AddActivityComponent, canActivate :[AuthGuard] },
   { path: 'project/:id',  component: AddProjectComponent, canActivate :[AuthGuard] },
-  { path: 'activities',    component: ViewActivitiesComponent },
+  { path: 'activities/:id',    component: ViewActivitiesComponent },
   { path: 'projects',      component: ViewProjectsComponent },
   { path: 'admin',         component: AdminComponent, canActivate :[AuthGuard] },
   { path: 'about',         component: IntroductionComponent },
   { path: 'upcomingEvents/:type',component: UpComingEventsComponent },
   { path:'supportersTalk', component : SupportersTalkComponent},
-  { path:'achievements/:type',component:AchievementsComponent}
+  { path:'achievements/:type',component:AchievementsComponent},
+  { path:'contactus', component:ContactUSComponent},
+  { path:'gallery', component:GalleryComponent }
 
 ];
 

@@ -13,7 +13,7 @@ public interface UserRepository extends CrudRepository<User, Long> {
 
     Page<User> findAll(Pageable pageable);
 
-    User findByNameAllIgnoringCase(String name);
+    User findByMobileOrEmail(String mobile, String email);
 
-    List<User> findByRole(Long role);
+    List<User> findByRole(Integer role);
 }

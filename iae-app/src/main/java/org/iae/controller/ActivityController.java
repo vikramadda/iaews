@@ -63,8 +63,8 @@ public class ActivityController {
 	            .body(udpatedActivity);
 	}
 
-    @RequestMapping(path="/update", method=RequestMethod.PUT)
-	public ResponseEntity<String> updateActivity(@RequestBody Activity activity, HttpServletRequest request) {
+    @RequestMapping(path="/update", method=RequestMethod.POST)
+	public ResponseEntity<String> updateActivity(@RequestBody Activity activity/*, HttpServletRequest request*/) {
 		
 		logger.debug("Entered into updateActivity()");
 
@@ -76,7 +76,7 @@ public class ActivityController {
 		
 		try {
 			
-			setImagesToActivity(activity, request);
+			//setImagesToActivity(activity, request);
 			
 			activityService.updateActivity(activity);
 		} catch(OperationFailedException e) {
@@ -162,18 +162,18 @@ public class ActivityController {
     	}
     }
 
-    @RequestMapping(path="/{activityName}", method=RequestMethod.GET)
-    public ResponseEntity<Object> getAllActivitiesByName(@PathVariable String activityName) {
+    @RequestMapping(path="/activityId/{activityId}", method=RequestMethod.GET)
+    public ResponseEntity<Object> getAllActivitiesByName(@PathVariable String activityId) {
 
-    	logger.debug("Entered into getActivitiesByName(), name {} ", activityName);
+    	logger.debug("Entered into getActivitiesByName(), name {} ", activityId);
 
-    	if(activityName == null) {
+    	if(activityId == null) {
     		return ResponseEntity
     				.status(HttpStatus.EXPECTATION_FAILED)
     				.body("Expected activity name");
     	}
     	
-    	Activity activity = activityService.getActivityByName(activityName);
+    	Activity activity = activityService.getActivityById(Long.parseLong(activityId));
 
     	logger.debug("Exit from getActivitiesByName()");
 
@@ -184,7 +184,7 @@ public class ActivityController {
     	} else {
     		return ResponseEntity
     				.status(HttpStatus.OK)
-    				.body("No activity found with " + activityName);
+    				.body("No activity found with " + activityId);
     	}
     }
 
