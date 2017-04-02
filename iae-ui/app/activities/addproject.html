@@ -19,7 +19,7 @@
                                class="form-control col-md-12" 
                                formControlName="name"
                                placeholder="Project Name"/>
-                               <input formControlName="id" type="hidden" />
+                        <input formControlName="id" type="hidden" />
                         <span class="col-md-8 help-block" *ngIf="displayMessage.name">
                             {{ displayMessage.name }}
                         </span>
@@ -69,22 +69,20 @@
                         </span>
                     </div>
                 </div>
-                <div class="form-group"
-                    [ngClass]="{'has-error': displayMessage.logoLocWithName }">
+                <div class="form-group">
                     <label class="col-md-3 control-label" 
-                           for="logoLocWithNameId">logoLocWithName</label>
+                           for="projectLogoId">Project Logo</label>
                     <div class="col-md-6">
-                        <input id="logoLocWithNameId"
-                               type="text" 
-                               class="form-control col-md-12" 
-                               formControlName="logoLocWithName"
-                               placeholder="logoLocWithName"/>
-                        <span class="col-md-8 help-block" *ngIf="displayMessage.logoLocWithName">
-                            {{ displayMessage.logoLocWithName }}
-                        </span>
+                        <input type="file" 
+                               class="form-control col-md-12"
+                               (change)="fileChange(projectLogo.files[0])"
+                               #projectLogo />
+                        <input id="projectLogoId"
+                               type="hidden" 
+                               formControlName="logoLocWithName"/>      
+                        <img [attr.src]='file_src' alt="" />
                     </div>
                 </div>
-                
                 <div class="form-group"
                     [ngClass]="{'has-error': displayMessage.status }">
                     <label class="col-md-3 control-label" 
@@ -113,6 +111,7 @@
                         <span>
                             <button class="btn btn-default"
                                     type="button" 
+                                    [disabled]="projectForm.value.id!=0"
                                     (click)="resetForm()">
                                 Reset
                             </button>

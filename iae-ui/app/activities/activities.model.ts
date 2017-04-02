@@ -1,11 +1,11 @@
 export class Project {
-	id:string = '';
+	id:number = 0;
 	name:string = '';
 	description:string = '';
 	creationDate:string = '';
 	endDate:string = '';
-	logoLocWithName:'';
 	status:string = '';
+	logoLocWithName:string ='';
 }
 export class Activity {
 	id:string = '';
