@@ -4,14 +4,13 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/observable/fromEvent';
 import 'rxjs/add/observable/merge';
 import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
+import { ActivatedRoute, Router } from '@angular/router';
+
 import { GenericValidator } from '../utils/generic-validator';
 import { MyValidators } from '../utils/field-validators';
 import { DialogService } from '../dialog/dialog.service';
 import { AlertComponent } from '../dialog/alert.component';
-
-import { Subscription } from 'rxjs/Subscription';
-import { ActivatedRoute, Router } from '@angular/router';
-
 import { ActivityService } from './activities.service';
 import { Project } from './activities.model';
 

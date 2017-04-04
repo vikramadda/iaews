@@ -16,8 +16,6 @@ public interface ActivityRepository extends CrudRepository<Activity, Long> {
 	
 	List<Activity> findAllByProjectId(Long projectId);
 	
-	List<Activity> findAllByProject(String projectName);
-
 	List<Activity> findAllByStartDateBetween(Date previousDate, Date currentDate);
 	
 	List<Activity> findAllByStartDateAfter(Date currentDate);

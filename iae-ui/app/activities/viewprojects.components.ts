@@ -20,7 +20,9 @@ constructor(private activityService: ActivityService){}
 	errorMessage: string;
 
 	ngOnInit():void {
-		this.activityService.listAllProjects().subscribe(projectlist => this.projects = projectlist,
-                           error => this.errorMessage = <any>error);   
+		this.loadingDBDefaults();
+	}
+	loadingDBDefaults():void {
+		this.activityService.listAllProjects().subscribe(projects => this.projects=projects);
 	}
 }

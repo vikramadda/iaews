@@ -8,10 +8,9 @@
 	<p><b>actBudget:&nbsp;</b>{{activity.actBudget}}</p>
 	<p><b>estBudget:&nbsp;</b>{{activity.estBudget}}</p>
 	<p><b>status:&nbsp;</b>{{activity.status}}</p>
-	<p><b>logo:&nbsp;</b>{{activity.logo}}</p>
-	<p><b>imagesLoc:&nbsp;</b>{{activity.imagesLoc}}</p>
-	<p><b>actBudget:&nbsp;</b>{{activity.actBudget}}</p>
-	<p><b>project:&nbsp;</b>{{activity.project.name}}</p>
+	<p><b>logoLocWithName:&nbsp;</b>{{activity.logoLocWithName}}</p>
+			<img [src]="activity.logoLocWithName">
+	<p><b>Project:&nbsp;</b>{{getProjectName(activity.projectId)}}</p>
 
 </li>
 </ul>

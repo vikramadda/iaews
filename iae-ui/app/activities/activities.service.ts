@@ -57,14 +57,20 @@ export class ActivityService {
             .catch(this.handleError);
     }
 
-    saveActivity(activity: Activity):Observable<string> {
-        return this.http.post(AppConstants.ADD_ACTIVITY, activity, this.options)
+    saveActivity(activity: Activity, activityLogo:File):Observable<string> {
+        const formData = new FormData();
+        formData.append('activity',JSON.stringify(activity));
+        formData.append('file', activityLogo);
+        return this.http.post(AppConstants.ADD_ACTIVITY, formData, this.options_multipart)
             .do(data => console.log('status ' + JSON.stringify(data)))
             .catch(this.handleError);
     }
 
-    updateActivity(activity: Activity):Observable<string> {
-        return this.http.post(AppConstants.UPDATE_ACTIVITY, activity, this.options)
+    updateActivity(activity: Activity, activityLogo:File):Observable<string> {
+        const formData = new FormData();
+        formData.append('activity',JSON.stringify(activity));
+        formData.append('file', activityLogo);
+        return this.http.post(AppConstants.UPDATE_ACTIVITY, formData, this.options_multipart)
             .do(data => console.log('status ' + JSON.stringify(data)))
             .catch(this.handleError);
     }

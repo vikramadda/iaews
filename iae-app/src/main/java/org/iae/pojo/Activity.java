@@ -1,19 +1,15 @@
 package org.iae.pojo;
 
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Transient;
 
 @Entity
 @Table(name="activities")
@@ -40,18 +36,10 @@ public class Activity {
 	@Column(name="estbudget")
 	private Integer estBudget;
 	private String status;
-	private String logo;
-	@Column(name="imagesloc")
-	private String imagesLoc;
-	
-	@OneToOne
-	@JoinColumn(name="projectid")
-	private Project project;
-
-	
-	
-	@Transient
-	private List<String> imagesURL;
+	@Column(name="logo")
+	private String logoLocWithName;
+	@Column(name="projectid")
+	private Long projectId;
 	
 	public Long getId() {
 		return id;
@@ -101,28 +89,17 @@ public class Activity {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	public String getLogo() {
-		return logo;
+	public String getLogoLocWithName() {
+		return logoLocWithName;
 	}
-	public void setLogo(String logo) {
-		this.logo = logo;
+	public void setLogoLocWithName(String logoLocWithName) {
+		this.logoLocWithName = logoLocWithName;
 	}
-	public String getImagesLoc() {
-		return imagesLoc;
+	public Long getProjectId() {
+		return projectId;
 	}
-	public void setImagesLoc(String imagesLoc) {
-		this.imagesLoc = imagesLoc;
+	public void setProjectId(Long projectId) {
+		this.projectId = projectId;
 	}
-	public Project getProject() {
-		return project;
-	}
-	public void setProject(Project project) {
-		this.project = project;
-	}
-	public List<String> getImagesURL() {
-		return imagesURL;
-	}
-	public void setImagesURL(List<String> imagesURL) {
-		this.imagesURL = imagesURL;
-	}
+
 }

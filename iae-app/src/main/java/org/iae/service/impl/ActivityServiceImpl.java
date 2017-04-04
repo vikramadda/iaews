@@ -1,7 +1,5 @@
 package org.iae.service.impl;
 
-import java.io.File;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -64,7 +62,7 @@ public class ActivityServiceImpl implements ActivityService {
 		
 		List<Activity> activityList = (List<Activity>) activityRepository.findAll();
 		
-		setImages(activityList);
+	//	setImages(activityList);
 		
 		logger.debug("Exit from getAllActivities()");
 		
@@ -72,14 +70,12 @@ public class ActivityServiceImpl implements ActivityService {
 	}
 
 	@Override
-	public List<Activity> getAllActivitiesByProject(String projectName) {
-		logger.debug("Entered into getAllActivitiesByProject(), projectName : {} ", projectName);
+	public List<Activity> getAllActivitiesByProject(String projectId) {
+		logger.debug("Entered into getAllActivitiesByProject(), projectId : {} ", projectId);
 		
-		List<Activity> activityList = (List<Activity>) activityRepository.findAllByProjectId(Long.parseLong(projectName));
+		List<Activity> activityList = (List<Activity>) activityRepository.findAllByProjectId(Long.parseLong(projectId));
 		
-		setImages(activityList);
-		
-		logger.debug("Exit from getAllActivitiesByProject(), projectName : {} ", projectName);
+		logger.debug("Exit from getAllActivitiesByProject(), projectId : {} ", projectId);
 		
 		return activityList;
 	}
@@ -88,7 +84,7 @@ public class ActivityServiceImpl implements ActivityService {
 	public List<Activity> getAllActivitiesByStatus(String status) {
 		logger.debug("Entered into getAllActivitiesByStatus(), status : {} ", status);
 		List<Activity> activityList = (List<Activity>) activityRepository.findAllByStatus(status);
-		setImages(activityList);
+		//setImages(activityList);
 		logger.debug("Exit from getAllActivitiesByStatus(), status : {} ", status);
 		return activityList;
 	}
@@ -109,7 +105,7 @@ public class ActivityServiceImpl implements ActivityService {
 		return upcomingActivities;
 	}
 
-	private void setImages(List<Activity> activityList) {
+/*	private void setImages(List<Activity> activityList) {
 		
 		if(activityList != null && activityList.size() > 0) {
 			for(Activity activity : activityList) {
@@ -133,7 +129,7 @@ public class ActivityServiceImpl implements ActivityService {
 				activity.setImagesURL(imagesForActivity);
 			}
 		}
-	}
+	}*/
 
 	@Override
 	public Activity getActivityById(Long activityId) {

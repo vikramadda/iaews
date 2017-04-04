@@ -5,8 +5,8 @@ public class IAEContants {
 	public static final String IMAGES_LOC 	= "/usr/local/";
 	public static final String DOCS_LOC 	= "/usr/local/";
 	
-	public static final String PROJECT_IMAGES_LOC 	= "/usr/local/";
-	public static final String PROJECT_DOCS_LOC 	= "/usr/local/";
+	public static final String PROJECT_IMAGES_LOC 	= "";
+	public static final String PROJECT_DOCS_LOC 	= "";
 	
 	public static final String ACTIVITY_IMAGES_LOC 	= "/usr/local/";
 	public static final String ACTIVITY_DOCS_LOC 	= "/usr/local/";
