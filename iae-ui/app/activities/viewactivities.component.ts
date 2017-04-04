@@ -4,7 +4,7 @@ import 'rxjs/add/operator/debounceTime';
 import { Subscription } from 'rxjs/Subscription';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ActivityService } from './activities.service';
-import { Activity } from './activities.model';
+import { Activity, Project } from './activities.model';
 
 @Component({
   moduleId: module.id,
@@ -19,9 +19,11 @@ constructor(private activityService: ActivityService, private route:ActivatedRou
 
 	pageTitle: string = 'List of Activities';
 	activities : Activity[] = [];
+	projects : Project[] = [];
 	errorMessage: string;
 	sub:Subscription;
 	ngOnInit():void {
+		this.loadingDBDefaults();
 		  this.sub = this.route.params.subscribe(
 	            params => {
 	                let id = params['id'];
@@ -34,5 +36,18 @@ constructor(private activityService: ActivityService, private route:ActivatedRou
 	                }
 	            }
 	      );	  
+	}
+
+	loadingDBDefaults():void {
+		this.activityService.listAllProjects().subscribe(projects => this.projects=projects);
+	}
+	getProjectName(id:number):string{
+		let name:string;
+		this.projects.forEach(function(item){
+			if(item.id==id)
+				name= item.name;
+		});
+		return name;
+
 	}
 }

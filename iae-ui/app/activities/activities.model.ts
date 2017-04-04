@@ -1,14 +1,14 @@
 export class Project {
-	id:string = '';
+	id:number = 0;
 	name:string = '';
 	description:string = '';
 	creationDate:string = '';
 	endDate:string = '';
-	logoLocWithName:'';
 	status:string = '';
+	logoLocWithName:string ='';
 }
 export class Activity {
-	id:string = '';
+	id:number = 0;
 	name:string = '';
 	description:string = '';
 	startDate:string = '';
@@ -16,7 +16,6 @@ export class Activity {
 	actBudget:string = '';
 	estBudget:string = '';
 	status:string = '';
-	logo:string = '';
-	imagesLoc:string = '';
-	project:Project = new Project();
+	logoLocWithName:string = '';
+	projectId:string ='';
 }

@@ -16,6 +16,9 @@ export class ActivityService {
 
 	private headers = new Headers({'Content-Type': 'application/json'});
     private options = new RequestOptions({ headers: this.headers });
+    private headers_multipart = new Headers({});
+    private options_multipart = new RequestOptions({ headers:this.headers_multipart });
+      
 
     constructor(private http: Http){}
 
@@ -54,14 +57,20 @@ export class ActivityService {
             .catch(this.handleError);
     }
 
-    saveActivity(activity: Activity):Observable<string> {
-        return this.http.post(AppConstants.ADD_ACTIVITY, activity, this.options)
+    saveActivity(activity: Activity, activityLogo:File):Observable<string> {
+        const formData = new FormData();
+        formData.append('activity',JSON.stringify(activity));
+        formData.append('file', activityLogo);
+        return this.http.post(AppConstants.ADD_ACTIVITY, formData, this.options_multipart)
             .do(data => console.log('status ' + JSON.stringify(data)))
             .catch(this.handleError);
     }
 
-    updateActivity(activity: Activity):Observable<string> {
-        return this.http.post(AppConstants.UPDATE_ACTIVITY, activity, this.options)
+    updateActivity(activity: Activity, activityLogo:File):Observable<string> {
+        const formData = new FormData();
+        formData.append('activity',JSON.stringify(activity));
+        formData.append('file', activityLogo);
+        return this.http.post(AppConstants.UPDATE_ACTIVITY, formData, this.options_multipart)
             .do(data => console.log('status ' + JSON.stringify(data)))
             .catch(this.handleError);
     }
@@ -73,14 +82,21 @@ export class ActivityService {
             .catch(this.handleError);
     }
 
-    saveProject(project: Project):Observable<string> {
-        return this.http.post(AppConstants.ADD_PROJECT, project, this.options)
+    saveProject(project: Project, projectLogo:File):Observable<string> {
+        const formData = new FormData();
+        formData.append('project',JSON.stringify(project));
+        formData.append('file', projectLogo);
+        return this.http.post(AppConstants.ADD_PROJECT, formData, this.options_multipart)
             .do(data => console.log('status ' + JSON.stringify(data)))
             .catch(this.handleError);
     }
 
-    updateProject(project: Project):Observable<string> {
-        return this.http.post(AppConstants.UPDATE_PROJECT, project, this.options)
+    updateProject(project: Project, projectLogo:File):Observable<string> {
+        const formData = new FormData();
+        formData.append('project',JSON.stringify(project));
+        formData.append('file', projectLogo);
+        console.log(project,projectLogo)
+        return this.http.post(AppConstants.UPDATE_PROJECT, formData, this.options_multipart)
             .do(data => console.log('status ' + JSON.stringify(data)))
             .catch(this.handleError);
     }

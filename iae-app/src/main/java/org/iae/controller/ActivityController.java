@@ -1,10 +1,11 @@
 package org.iae.controller;
 
 import java.io.File;
-import java.util.Arrays;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
 
 import org.iae.exception.ObjectNotFoundException;
 import org.iae.exception.OperationFailedException;
@@ -17,27 +18,32 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RestController
 @RequestMapping(path="/activity")
 public class ActivityController {
 
 	private static final Logger logger = LoggerFactory.getLogger(ActivityController.class);
-	
+	private static String UPLOADED_FOLDER = "";
 	@Autowired
 	private ActivityService activityService;
 
     @RequestMapping(path="/add", method=RequestMethod.POST)
-	public ResponseEntity<Object> addActivity(@RequestBody Activity activity/*, HttpServletRequest request*/) {
+	public ResponseEntity<Object> addActivity(@RequestParam("activity") String activityBean, @RequestParam("file") MultipartFile[] files) throws JsonParseException, JsonMappingException, IOException {
 		
 		logger.debug("Entered into addActivity()");
 
 		Activity udpatedActivity = null;
-		
+		Activity activity = new ObjectMapper().readValue(activityBean, Activity.class);
 		if(activity == null) {
 			return ResponseEntity
 		            .status(HttpStatus.EXPECTATION_FAILED)
@@ -45,8 +51,8 @@ public class ActivityController {
 		}
 		
 		try {
-
-			//setImagesToActivity(activity, request);
+			if(files.length>0)
+			setImagesToActivity(activity, files);
 
 			udpatedActivity = activityService.addActivity(activity);
 			
@@ -64,10 +70,10 @@ public class ActivityController {
 	}
 
     @RequestMapping(path="/update", method=RequestMethod.POST)
-	public ResponseEntity<String> updateActivity(@RequestBody Activity activity/*, HttpServletRequest request*/) {
+	public ResponseEntity<String> updateActivity(@RequestParam("activity") String activityBean, @RequestParam("file") MultipartFile[] files) throws JsonParseException, JsonMappingException, IOException {
 		
 		logger.debug("Entered into updateActivity()");
-
+		Activity activity = new ObjectMapper().readValue(activityBean, Activity.class);
 		if(activity == null) {
 			return ResponseEntity
 		            .status(HttpStatus.EXPECTATION_FAILED)
@@ -75,9 +81,8 @@ public class ActivityController {
 		}
 		
 		try {
-			
-			//setImagesToActivity(activity, request);
-			
+			if(files.length>0)
+				setImagesToActivity(activity, files);
 			activityService.updateActivity(activity);
 		} catch(OperationFailedException e) {
 			return ResponseEntity
@@ -188,18 +193,18 @@ public class ActivityController {
     	}
     }
 
-    @RequestMapping(path="/project/{projectName}", method=RequestMethod.GET)
-    public ResponseEntity<Object> getAllActivitiesByProject(@PathVariable String projectName) {
+    @RequestMapping(path="/project/{projectId}", method=RequestMethod.GET)
+    public ResponseEntity<Object> getAllActivitiesByProject(@PathVariable String projectId) {
 
-    	logger.debug("Entered into getAllActivitiesByProject(), name {} ", projectName);
+    	logger.debug("Entered into getAllActivitiesByProject(), projectId {} ", projectId);
 
-    	if(projectName == null) {
+    	if(projectId == null) {
     		return ResponseEntity
     				.status(HttpStatus.EXPECTATION_FAILED)
     				.body("Expected project name");
     	}
     	
-    	List<Activity> activities = activityService.getAllActivitiesByProject(projectName);
+    	List<Activity> activities = activityService.getAllActivitiesByProject(projectId);
 
     	logger.debug("Exit from getAllActivitiesByProject()");
 
@@ -210,7 +215,7 @@ public class ActivityController {
     	} else {
     		return ResponseEntity
     				.status(HttpStatus.OK)
-    				.body("No activites found for the project " + projectName);
+    				.body("No activites found for the project " + projectId);
     	}
     }
 
@@ -254,18 +259,20 @@ public class ActivityController {
     	}
     }
 
-    private void setImagesToActivity(Activity activity, HttpServletRequest request) {
-    	
-		String[] fileNamesArray = request.getParameterMap().get(IAEContants.PARAM_FILE_NAMES);
-		
-		if(fileNamesArray != null) {
-			List<String> fileNames = Arrays.asList();	
-			for(String fileName : fileNames) {
-				if(fileName.equalsIgnoreCase(activity.getLogo())) {
-					activity.setLogo(request.getParameter(IAEContants.PARAM_FILE_PATH) + File.separator + fileName);
-				}
-			}
-			activity.setImagesLoc(request.getParameter(IAEContants.PARAM_FILE_PATH));
+    private void setImagesToActivity(Activity activity, MultipartFile[] files) throws IOException {
+
+		if(files.length==0)return;
+		UPLOADED_FOLDER = IAEContants.PROJECT_DOCS_LOC + File.separator + activity.getProjectId()+File.separator+activity.getId() ;
+		File dir = new File(UPLOADED_FOLDER);
+		if (!dir.exists())
+			dir.mkdirs();
+		for (int i = 0; i < files.length; i++) {
+			MultipartFile file = files[i];
+			// Get the file and save it somewhere
+			byte[] bytes = file.getBytes();
+			Path path = Paths.get(dir.getAbsolutePath() + File.separator + file.getOriginalFilename());
+			Files.write(path, bytes);
+			activity.setLogoLocWithName(dir.getAbsolutePath() + File.separator + file.getOriginalFilename());
 		}
 
     }
