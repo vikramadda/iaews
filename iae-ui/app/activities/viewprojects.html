@@ -15,7 +15,7 @@
 			<p><b>endDate:&nbsp;</b>{{project.endDate}}</p>
 			<p><b>status:&nbsp;</b>{{project.status}}</p>
 			<p><b>logoLocWithName:&nbsp;</b>{{project.logoLocWithName}}</p>
-			<img [src]="project.logoLocWithName">
+			<img [src]="sanitize(project.logoLocWithName)">
 		</li>
 	  </ul>
     </div>
