@@ -1,10 +1,10 @@
 import { Component,Input } from '@angular/core';
-import {BrowserXhr,Http} from '@angular/http';
-import * as saveAs from 'file-saver';
+import { BrowserXhr,Http } from '@angular/http';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'download',
-  template: '<div class="filediv"><a (click)="downloadFile()"><img src="app/images/pdf-icon.png" class="pdf-icon"/>{{displayName}}</a></div>',
+  template: '<div class="filediv"><a (click)="downloadFile()"><img src="src/app/images/pdf-icon.png" class="pdf-icon"/>{{displayName}}</a></div>',
   styles :[`
 	.pdf-icon{
     	width: 15px;
