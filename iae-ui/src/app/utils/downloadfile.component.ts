@@ -4,7 +4,7 @@ import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'download',
-  template: '<div class="filediv"><a (click)="downloadFile()"><img src="src/app/images/pdf-icon.png" class="pdf-icon"/>{{displayName}}</a></div>',
+  template: '<div class="filediv"><a (click)="downloadFile()"><img src="assets/images/pdf-icon.png" class="pdf-icon"/>{{displayName}}</a></div>',
   styles :[`
 	.pdf-icon{
     	width: 15px;

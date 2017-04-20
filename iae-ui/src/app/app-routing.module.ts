@@ -20,7 +20,6 @@ import { GalleryComponent } from './home/gallery.component';
 
 
 const appRoutes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'signup',        component: SignupComponent },
   { path: 'signin',        component: SigninComponent },
   { path: 'home',          component: MainContainerComponent },
