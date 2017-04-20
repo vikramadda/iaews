@@ -33,8 +33,9 @@ const appRoutes: Routes = [
   { path:'supportersTalk', component : SupportersTalkComponent},
   { path:'achievements/:type',component:AchievementsComponent},
   { path:'contactus', component:ContactUSComponent},
-  { path:'gallery', component:GalleryComponent }
-
+  { path:'gallery', component:GalleryComponent },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: '**', redirectTo: '/home', pathMatch: 'full' }
 ];
 
 @NgModule({
