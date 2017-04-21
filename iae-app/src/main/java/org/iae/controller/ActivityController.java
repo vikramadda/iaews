@@ -262,7 +262,7 @@ public class ActivityController {
     private void setImagesToActivity(Activity activity, MultipartFile[] files) throws IOException {
 
 		if(files.length==0)return;
-		UPLOADED_FOLDER = IAEContants.PROJECT_DOCS_LOC + File.separator + activity.getProjectId()+File.separator+activity.getId() ;
+		UPLOADED_FOLDER = IAEContants.ACTIVITY_IMAGES_LOC + File.separator + activity.getProjectId()+File.separator+activity.getId() ;
 		File dir = new File(UPLOADED_FOLDER);
 		if (!dir.exists())
 			dir.mkdirs();
