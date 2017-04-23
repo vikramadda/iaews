@@ -48,6 +48,7 @@
 	<properties>
 		<java.version>1.8</java.version>
 		<start-class>org.iae.Application</start-class>
+		<ui-files-location>src/main/webapp</ui-files-location>
 	</properties>
 
 	<build>
@@ -55,6 +56,9 @@
 		<resources>
 			<resource>
 				<directory>src/main/resources</directory>
+			</resource>
+			<resource>
+				<directory>${ui-files-location}</directory>
 			</resource>
 		</resources>
 		<plugins>
@@ -77,7 +81,7 @@
 									<version>1.0.0</version>
 									<type>tar</type>
 									<!-- <includes>path/to/Files.whatsoever</includes> -->
-									<outputDirectory>${project.build.directory}/../WebContent</outputDirectory>
+									<outputDirectory>${ui-files-location}</outputDirectory>
 								</artifactItem>
 							</artifactItems>
 						</configuration>
@@ -91,7 +95,7 @@
 					<webResources>
 						<resource>
 							<!-- this is relative to the pom.xml directory -->
-							<directory>WebContent</directory>
+							<directory>${ui-files-location}</directory>
 						</resource>
 					</webResources>
 				</configuration>
