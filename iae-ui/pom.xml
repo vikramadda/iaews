@@ -15,6 +15,7 @@
 				<configuration>
 					<nodeVersion>v6.9.4</nodeVersion>
 					<npmVersion>3.10.10</npmVersion>
+					<installDirectory>.node</installDirectory>
 				</configuration>
 				<executions>
 					<execution>
