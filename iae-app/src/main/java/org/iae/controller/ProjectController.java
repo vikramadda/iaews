@@ -198,7 +198,7 @@ public class ProjectController {
 
 	private void setImagesToProject(Project project, MultipartFile[] files) throws IOException {
 		if(files.length==0)return;
-		UPLOADED_FOLDER = IAEContants.PROJECT_DOCS_LOC + File.separator + project.getId() ;
+		UPLOADED_FOLDER = IAEContants.PROJECTS_CONTEXT+IAEContants.PROJECT_DOCS_LOC + File.separator + project.getId() ;
 		File dir = new File(UPLOADED_FOLDER);
 		if (!dir.exists())
 			dir.mkdirs();
@@ -206,9 +206,9 @@ public class ProjectController {
 			MultipartFile file = files[i];
 			// Get the file and save it somewhere
 			byte[] bytes = file.getBytes();
-			Path path = Paths.get(dir.getAbsolutePath() + File.separator + file.getOriginalFilename());
+			Path path = Paths.get(dir.getPath() + File.separator + file.getOriginalFilename());
 			Files.write(path, bytes);
-			project.setLogoLocWithName(dir.getAbsolutePath() + File.separator + file.getOriginalFilename());
+			project.setLogoLocWithName(dir.getPath() + File.separator + file.getOriginalFilename());
 		}
 	}
 

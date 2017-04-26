@@ -5,8 +5,13 @@ public class IAEContants {
 	public static final String IMAGES_LOC 	= "/usr/local/";
 	public static final String DOCS_LOC 	= "/usr/local/";
 	
-	public static final String PROJECT_IMAGES_LOC 	= "";
-	public static final String PROJECT_DOCS_LOC 	= "";
+	public static final String PROJECTS_CONTEXT = "/iaefiles";
+	/**
+	 * Need to add this context in tomcat server.xml
+	 * <Context docBase="D:/iaefiles/" path="/iaefiles"/>
+	 */
+	
+	public static final String PROJECT_DOCS_LOC 	= "/projects";
 	
 	public static final String ACTIVITY_IMAGES_LOC 	= "/usr/local/";
 	public static final String ACTIVITY_DOCS_LOC 	= "/usr/local/";
